@@ -13,6 +13,8 @@ namespace Rules.LexicalAnalyzer.Constants
 
         private string Input { get; set; }
 
+        private int CurrentConstant { get; set; }
+
         private bool HasInput
         {
             get
@@ -76,7 +78,7 @@ namespace Rules.LexicalAnalyzer.Constants
                     return NextToken();
                 else
                 {
-                    return new Token(token, GetLexeme(Input, start, end), start);
+                    return new Token(token, GetLexeme(Input, start), start);
                 }
             }
             catch (Exception ex)
@@ -85,7 +87,7 @@ namespace Rules.LexicalAnalyzer.Constants
             }
         }
 
-        private string GetLexeme(string input, int start, int end)
+        private string GetLexeme(string input, int start)
         {
             return input.Substring(start, 1);
         }

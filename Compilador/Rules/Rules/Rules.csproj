@@ -45,6 +45,7 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="LexicalAnalyzer\Constants\Constants.cs" />
     <Compile Include="LexicalAnalyzer\Constants\Lexico.cs" />
+    <Compile Include="LexicalAnalyzer\Constants\Translator.cs" />
     <Compile Include="LexicalAnalyzer\Exceptions\AnalysisError.cs" />
     <Compile Include="LexicalAnalyzer\Exceptions\LexicalError.cs" />
     <Compile Include="LexicalAnalyzer\Exceptions\SemanticError.cs" />

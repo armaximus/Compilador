@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rules.LexicalAnalyzer.Constants;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace Rules.LexicalAnalyzer
 
         public override string ToString()
         {
-            return string.Format("{0} ( {1} ) @ {2}", Id, Lexeme, Position);
+            return string.Format("{0} ::= {1}", Translator.GetToken(Id), Lexeme);
         }
     }
 }

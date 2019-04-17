@@ -214,6 +214,7 @@ namespace Main
             this.mensagens.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.mensagens.AutoSize = true;
+            this.mensagens.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mensagens.Location = new System.Drawing.Point(3, 425);
             this.mensagens.MinimumSize = new System.Drawing.Size(882, 100);
             this.mensagens.Name = "mensagens";
@@ -228,6 +229,7 @@ namespace Main
             // 
             this.barraStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.barraStatus.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.barraStatus.Location = new System.Drawing.Point(3, 531);
             this.barraStatus.MaxLength = 0;
             this.barraStatus.MinimumSize = new System.Drawing.Size(880, 30);
