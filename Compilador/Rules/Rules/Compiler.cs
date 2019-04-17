@@ -21,10 +21,13 @@ namespace Rules
                 {
                     retorno += t.ToString();
                 }
+                retorno += "\n programa compilado com sucesso";
             }
             catch (LexicalError e)
             {
-                retorno += e.Message + "e;, em " + e.Position;
+                //VERIFICAR FORMA DE APRESENTAR A LINHA AQUI AO INVES DA POSICÇÃO
+                //VERIFICAR FORMA DE PEGAR O TOKEN AQUI TBM
+                retorno += "Erro na linha " + e.Position  + " - " + e.Message;
             }
             return retorno;
         }
