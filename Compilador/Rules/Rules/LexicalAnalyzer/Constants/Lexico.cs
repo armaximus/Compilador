@@ -44,47 +44,50 @@ namespace Rules.LexicalAnalyzer.Constants
 
         public Token NextToken()
         {
-            if (!HasInput)
-                return null;
-
-            int start = Position;
-
-            int state = 0;
-            int lastState = 0;
-            int endState = -1;
-            int end = -1;
-
-            while (HasInput)
+            try
             {
-                lastState = state;
-                state = NextState(NextChar, state);
+                if (!HasInput)
+                    return null;
 
-                if (state < 0)
-                    break;
+                int start = Position, state = 0, lastState = 0, endState = -1, end = -1;
 
-                else
+                while (HasInput)
                 {
-                    if (TokenForState(state) >= 0)
+                    lastState = state;
+                    state = NextState(NextChar, state);
+
+                    if (state < 0)
+                        break;
+                    else if (TokenForState(state) >= 0)
                     {
                         endState = state;
                         end = Position;
                     }
                 }
+
+                if (endState < 0 || (endState != state && TokenForState(lastState) == -2))
+                    throw new LexicalError(SCANNER_ERROR[lastState], start);
+
+                Position = end;
+
+                int token = TokenForState(endState);
+
+                if (token == 0)
+                    return NextToken();
+                else
+                {
+                    return new Token(token, GetLexeme(Input, start, end), start);
+                }
             }
-            if (endState < 0 || (endState != state && TokenForState(lastState) == -2))
-                throw new LexicalError(SCANNER_ERROR[lastState], start);
-
-            Position = end;
-
-            int token = TokenForState(endState);
-
-            if (token == 0)
-                return NextToken();
-            else
+            catch (Exception ex)
             {
-                string lexeme = Input.Substring(start, end);
-                return new Token(token, lexeme, start);
+                throw new LexicalError(ex.Message, Position);
             }
+        }
+
+        private string GetLexeme(string input, int start, int end)
+        {
+            return input.Substring(start, 1);
         }
 
         private int NextState(char c, int state)
@@ -109,7 +112,7 @@ namespace Rules.LexicalAnalyzer.Constants
 
         private int TokenForState(int state)
         {
-            return (state < 0 || state >= TOKEN_STATE.Length) ? -1 :TOKEN_STATE[state];
+            return (state < 0 || state >= TOKEN_STATE.Length) ? -1 : TOKEN_STATE[state];
         }
     }
 }

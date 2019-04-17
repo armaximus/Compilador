@@ -12,7 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace Main
 {
     public partial class Principal : Form
@@ -29,7 +28,6 @@ namespace Main
         {
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(OnKeyDown);
-
         }
 
         private void editor_TextChanged(object sender, EventArgs e)
@@ -109,9 +107,7 @@ namespace Main
 
         private void NewFile()
         { 
-            editor.Text = "";
-            mensagens.Text = "";
-            barraStatus.Text = "";
+            editor.Text = mensagens.Text = barraStatus.Text = string.Empty;
             fileManager = new FileManager();
         }
 
@@ -138,17 +134,17 @@ namespace Main
             try
             {
                 fileManager.SaveFile(editor.Text);
-                mensagens.Text = "";
+                mensagens.Text = string.Empty;
                 MessageBox.Show("Arquivo salvo com sucesso!");
                 barraStatus.Text = fileManager.filePath;
             }
             catch (ArgumentException e)
             {
-                MessageBox.Show("O arquivo não foi salvo, nenhuma local selecionada!");
+                MessageBox.Show("O arquivo não foi salvo, nenhum local selecionado.", "Aviso");
             }
             catch (Exception e)
             {
-                MessageBox.Show(string.Format("Não foi possível salvar o arquivo. Descrição: {0}", e.Message), "Atenção");
+                MessageBox.Show(string.Format("Não foi possível salvar o arquivo: {0}", e.Message), "Atenção");
             }
         }
 
@@ -161,6 +157,5 @@ namespace Main
         {
             mensagens.Text = compiler.Compile(editor.Text);
         }
-
     }
 }

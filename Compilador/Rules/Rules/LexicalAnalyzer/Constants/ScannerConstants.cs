@@ -1115,56 +1115,56 @@ namespace Rules.LexicalAnalyzer.Constants
         public int[] SPECIAL_CASES_INDEXES =
             { 0, 0, 0, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22 };
 
-        public String[] SPECIAL_CASES_KEYS =
+        public string[] SPECIAL_CASES_KEYS =
             {  "and", "begin", "bool", "char", "end", "false", "float", "forward", "ifFalseDo", "ifTrueDo", "int", "main", "module", "not", "or", "read", "string", "true", "voidentificador", "whileFalseDo", "whileTrueDo", "write" };
 
         public int[] SPECIAL_CASES_VALUES =
             {  8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 };
 
-        public String[] SCANNER_ERROR =
+        public string[] SCANNER_ERROR =
         {
         "símbolo inválido",
-        "",
+        string.Empty,
         "Erro identificando \"!=\"",
         "constante string inválida",
         "comentário de bloco inválido ou nâo finalizado",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
         "constante caracter inválida",
-        "",
-        "",
-        "",
-        "",
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
         "comentário de bloco inválido ou nâo finalizado",
-        "",
-        "",
-        "",
+        string.Empty,
+        string.Empty,
+        string.Empty,
         "constante real inválida",
-        "",
-        "",
-        "",
-        "",
-        "",
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
+        string.Empty,
         "comentário de bloco inválido ou nâo finalizado",
         "constante real inválida",
         "comentário de bloco inválido ou nâo finalizado",
         "comentário de bloco inválido ou nâo finalizado",
         "comentário de bloco inválido ou nâo finalizado",
-        ""
+        string.Empty
     };
     }
 }

@@ -2,34 +2,45 @@
 using Rules.LexicalAnalyzer.Constants;
 using Rules.LexicalAnalyzer.Exceptions;
 using System;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Rules
 {
     public class Compiler
     {
-        public String Compile(String programa)
+        public string Compile(string programa)
         {
+            StringBuilder retorno = new StringBuilder();
 
-            Lexico lexico = new Lexico(programa);
-            String retorno = "";
+            Lexico lexico = new Lexico(programa.Trim());
 
             try
             {
                 Token t = null;
+
                 while ((t = lexico.NextToken()) != null)
                 {
-                    retorno += t.ToString();
+                    retorno.AppendLine(t.ToString());
                 }
-                retorno += "\n programa compilado com sucesso";
+
+                if (retorno.Length > 0)
+                    retorno.AppendLine();
+
+                retorno.AppendLine("Programa compilado com sucesso.");
             }
             catch (LexicalError e)
             {
-                //VERIFICAR FORMA DE APRESENTAR A LINHA AQUI AO INVES DA POSICÇÃO
-                //VERIFICAR FORMA DE PEGAR O TOKEN AQUI TBM
-                retorno += "Erro na linha " + e.Position  + " - " + e.Message;
+                // TODO : Trazer o token
+                retorno.AppendLine(string.Format("Erro na linha {0} - {1}.", GetLine(programa, e.Position), e.Message));
             }
-            return retorno;
+
+            return retorno.ToString().Trim();
         }
-    }  
+
+        private int GetLine(string input, int position)
+        {
+            return input.Substring(0, position).Split('\n').Length + 1;
+        }
+    }
 }

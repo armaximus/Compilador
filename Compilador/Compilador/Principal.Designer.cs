@@ -59,7 +59,7 @@ namespace Main
             btnCompilar.Name = "btnCompilar";
             btnCompilar.Size = new System.Drawing.Size(105, 70);
             btnCompilar.TabIndex = 14;
-            btnCompilar.Text = "compilar [F9]";
+            btnCompilar.Text = "Compilar [F9]";
             btnCompilar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             btnCompilar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             btnCompilar.UseVisualStyleBackColor = true;
@@ -75,7 +75,7 @@ namespace Main
             this.btnEquipe.Name = "btnEquipe";
             this.btnEquipe.Size = new System.Drawing.Size(105, 70);
             this.btnEquipe.TabIndex = 2;
-            this.btnEquipe.Text = "equipe [F1]";
+            this.btnEquipe.Text = "Equipe [F1]";
             this.btnEquipe.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnEquipe.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEquipe.UseVisualStyleBackColor = true;
@@ -92,7 +92,7 @@ namespace Main
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(105, 70);
             this.btnNovo.TabIndex = 8;
-            this.btnNovo.Text = "novo [ctrl-n]";
+            this.btnNovo.Text = "Novo [Ctrl + N]";
             this.btnNovo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnNovo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnNovo.UseVisualStyleBackColor = true;
@@ -108,7 +108,7 @@ namespace Main
             this.btnAbrir.Name = "btnAbrir";
             this.btnAbrir.Size = new System.Drawing.Size(105, 70);
             this.btnAbrir.TabIndex = 9;
-            this.btnAbrir.Text = "abrir [ctrl-o]";
+            this.btnAbrir.Text = "Abrir [Ctrl + O]";
             this.btnAbrir.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnAbrir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAbrir.UseVisualStyleBackColor = true;
@@ -125,7 +125,7 @@ namespace Main
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(105, 70);
             this.btnSalvar.TabIndex = 10;
-            this.btnSalvar.Text = "salvar [ctrl-s]";
+            this.btnSalvar.Text = "Salvar [Ctrl + S]";
             this.btnSalvar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnSalvar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnSalvar.UseVisualStyleBackColor = true;
@@ -141,7 +141,7 @@ namespace Main
             this.btnCopiar.Name = "btnCopiar";
             this.btnCopiar.Size = new System.Drawing.Size(105, 70);
             this.btnCopiar.TabIndex = 11;
-            this.btnCopiar.Text = "copiar [ctrl-c]";
+            this.btnCopiar.Text = "Copiar [Ctrl + C]";
             this.btnCopiar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnCopiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCopiar.UseVisualStyleBackColor = true;
@@ -156,7 +156,7 @@ namespace Main
             this.btnColar.Name = "btnColar";
             this.btnColar.Size = new System.Drawing.Size(105, 70);
             this.btnColar.TabIndex = 12;
-            this.btnColar.Text = "colar [ctrl-v]";
+            this.btnColar.Text = "Colar [Ctrl + V]";
             this.btnColar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnColar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnColar.UseVisualStyleBackColor = true;
@@ -171,7 +171,7 @@ namespace Main
             this.btnRecortar.Name = "btnRecortar";
             this.btnRecortar.Size = new System.Drawing.Size(105, 70);
             this.btnRecortar.TabIndex = 13;
-            this.btnRecortar.Text = "recortar [ctrl-x]";
+            this.btnRecortar.Text = "Recortar [Ctrl + X]";
             this.btnRecortar.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnRecortar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnRecortar.UseVisualStyleBackColor = true;
@@ -189,8 +189,6 @@ namespace Main
             this.editor.TabIndex = 15;
             this.editor.VScrollBar = false;
             this.editor.TextChanged += new System.EventHandler(this.editor_TextChanged);
-            this.editor.Margins[0].Width = 16;
-
             // 
             // panel1
             // 
@@ -250,6 +248,7 @@ namespace Main
             this.KeyPreview = true;
             this.MinimumSize = new System.Drawing.Size(900, 600);
             this.Name = "Principal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OnKeyDown);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
