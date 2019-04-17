@@ -12,7 +12,7 @@ namespace Rules
         public string Compile(string programa)
         {
             StringBuilder retorno = new StringBuilder();
-
+            
             Lexico lexico = new Lexico(programa.Trim());
 
             try
@@ -32,7 +32,7 @@ namespace Rules
             catch (LexicalError e)
             {
                 // TODO : Trazer o token
-                retorno.AppendLine(string.Format("Erro na linha {0} - {1}.", GetLine(programa, e.Position), e.Message));
+                return string.Format("Erro na linha {0} - {1}.", GetLine(programa, e.Position), e.Message);
             }
 
             return retorno.ToString().Trim();
