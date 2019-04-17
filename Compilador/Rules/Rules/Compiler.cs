@@ -40,7 +40,7 @@ namespace Rules
 
         private int GetLine(string input, int position)
         {
-            return input.Substring(0, position).Split('\n').Length + 1;
+            return input.Substring(0, position).Split('\n').Length;
         }
     }
 }
