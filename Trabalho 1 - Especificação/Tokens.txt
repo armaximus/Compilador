@@ -66,4 +66,4 @@ write = identificador : "write"
 "^"
 
 // Formatação
-:[\s\n\t]
+:[\s\n\t\r]
