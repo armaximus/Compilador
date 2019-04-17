@@ -14,37 +14,36 @@ constanteString : \" [^\\ \n \"]* \"
 constanteCaractere : \\(\s|n|t)
 
 // f: Comentário de linha
-// comentarioLinha : [^\n]* 
+//comentarioLinha : [^\n]* 
 
 // g: Comentário bloco
 bloco : {inicio} {exc} ((#+ \|)? {exc})* {exc}? {fim}
 
-// Palavras reservadas
-and = id : "and"
-begin = id : "begin"
-bool = id : "bool"
-char = id : "char"
-end = id : "end"
-false = id : "false"
-float = id : "float"
-forward = id : "forward"
-ifFalseDo = id : "ifFalseDo"
-ifTrueDo = id : "ifTrueDo"
-int = id : "int"
-main = id : "main"
-module = id : "module"
-not = id : "not"
-or = id : "or"
-read = id : "read"
-string = id : "string"
-true = id : "true"
-void = id : "void"
-whileFalseDo = id : "whileFalseDo"
-whileTrueDo = id : "whileTrueDo"
-write = id : "write"
-
+and = identificador : "and" 
+begin = identificador : "begin"
+bool = identificador : "bool"
+char = identificador : "char"
+end = identificador : "end"
+false = identificador : "false"
+float = identificador : "float"
+forward = identificador : "forward"
+ifFalseDo = identificador : "ifFalseDo"
+ifTrueDo = identificador : "ifTrueDo"
+int = identificador : "int"
+main = identificador : "main"
+module = identificador : "module"
+not = identificador : "not"
+or = identificador : "or"
+read = identificador : "read"
+string = identificador : "string"
+true = identificador : "true"
+voidentificador = identificador : "voidentificador"
+whileFalseDo = identificador : "whileFalseDo"
+whileTrueDo = identificador : "whileTrueDo"
+write = identificador : "write"
 // Simbolos especiais
 "+"
+"-"
 "*"
 "*"
 "/"
@@ -65,5 +64,6 @@ write = id : "write"
 "+="
 "-="
 "^"
+
 // Formatação
 :[\s\n\t]
