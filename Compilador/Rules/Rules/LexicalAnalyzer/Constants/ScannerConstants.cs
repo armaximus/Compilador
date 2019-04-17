@@ -8,7 +8,7 @@ namespace Rules.LexicalAnalyzer.Constants
 {
     public class ScannerConstants
     {
-        int[] SCANNER_TABLE_INDEXES =
+        public int[] SCANNER_TABLE_INDEXES =
     {
         0,
         84,
@@ -55,7 +55,7 @@ namespace Rules.LexicalAnalyzer.Constants
         1051
         };
 
-        int[,] SCANNER_TABLE =
+        public int[,] SCANNER_TABLE =
         {
         {9, 1},
         {10, 1},
@@ -1110,18 +1110,18 @@ namespace Rules.LexicalAnalyzer.Constants
         {255, 36}
     };
 
-        int[] TOKEN_STATE = { 3, 0, -1, -1, -1, 35, 36, 32, 30, 43, 31, 44, 33, 3, 46, 45, 39, 47, 41, 34, 2, -1, 50, 2, 38, 5, -1, 48, 49, 4, -1, 40, 37, 42, 6, 2, -1, -1, -1, -1, -1, 7 };
+        public int[] TOKEN_STATE = { 3, 0, -1, -1, -1, 35, 36, 32, 30, 43, 31, 44, 33, 3, 46, 45, 39, 47, 41, 34, 2, -1, 50, 2, 38, 5, -1, 48, 49, 4, -1, 40, 37, 42, 6, 2, -1, -1, -1, -1, -1, 7 };
 
-        int[] SPECIAL_CASES_INDEXES =
+        public int[] SPECIAL_CASES_INDEXES =
             { 0, 0, 0, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22 };
 
-        String[] SPECIAL_CASES_KEYS =
+        public String[] SPECIAL_CASES_KEYS =
             {  "and", "begin", "bool", "char", "end", "false", "float", "forward", "ifFalseDo", "ifTrueDo", "int", "main", "module", "not", "or", "read", "string", "true", "voidentificador", "whileFalseDo", "whileTrueDo", "write" };
 
-        int[] SPECIAL_CASES_VALUES =
+        public int[] SPECIAL_CASES_VALUES =
             {  8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 };
 
-        String[] SCANNER_ERROR =
+        public String[] SCANNER_ERROR =
         {
         "Caractere não esperado",
         "",

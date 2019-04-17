@@ -19,7 +19,7 @@ namespace Rules
                 Token t = null;
                 while ((t = lexico.NextToken()) != null)
                 {
-                    retorno += t.Lexeme;
+                    retorno += t.ToString();
                 }
             }
             catch (LexicalError e)

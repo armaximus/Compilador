@@ -25,7 +25,10 @@ namespace Rules.LexicalAnalyzer.Constants
         {
             get
             {
-                return (HasInput) ? Input[++Position] : char.MinValue;
+                if (HasInput)
+                    return Input[Position++];
+                else
+                    return char.MinValue;
             }
         }
 
