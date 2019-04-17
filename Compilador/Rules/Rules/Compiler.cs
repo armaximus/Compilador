@@ -21,7 +21,7 @@ namespace Rules
 
                 while ((t = lexico.NextToken()) != null)
                 {
-                    retorno.AppendLine(t.ToString());
+                    retorno.AppendLine(string.Format("{0} {1}", GetLine(programa, t.Position), t.ToString()));
                 }
 
                 if (retorno.Length > 0)
