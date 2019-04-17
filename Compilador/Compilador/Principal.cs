@@ -100,7 +100,7 @@ namespace Main
         }
         private void btnCompilar_Click(object sender, EventArgs e)
         {
-            mensagens.Text = compiler.Compile();
+            Compile();
         }
         private void btnEquipe_Click(object sender, EventArgs e)
         {
@@ -159,7 +159,7 @@ namespace Main
 
         private void Compile()
         {
-            mensagens.Text = compiler.Compile();
+            mensagens.Text = compiler.Compile(editor.Text);
         }
 
     }

@@ -8,7 +8,7 @@ namespace Rules.LexicalAnalyzer.Exceptions
 {
     public class AnalysisError : Exception
     {
-        private int Position { get; set; }
+        public int Position { get; set; }
 
         public AnalysisError(string message) : this(message, -1)
         {

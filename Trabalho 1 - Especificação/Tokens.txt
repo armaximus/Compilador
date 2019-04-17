@@ -20,7 +20,28 @@ constanteCaractere : \\(\s|n|t)
 bloco : {inicio} {exc} ((#+ \|)? {exc})* {exc}? {fim}
 
 // Palavras reservadas
-  
+and = id : "and"
+begin = id : "begin"
+bool = id : "bool"
+char = id : "char"
+end = id : "end"
+false = id : "false"
+float = id : "float"
+forward = id : "forward"
+ifFalseDo = id : "ifFalseDo"
+ifTrueDo = id : "ifTrueDo"
+int = id : "int"
+main = id : "main"
+module = id : "module"
+not = id : "not"
+or = id : "or"
+read = id : "read"
+string = id : "string"
+true = id : "true"
+void = id : "void"
+whileFalseDo = id : "whileFalseDo"
+whileTrueDo = id : "whileTrueDo"
+write = id : "write"
 
 // Simbolos especiais
 "+"
@@ -28,6 +49,21 @@ bloco : {inicio} {exc} ((#+ \|)? {exc})* {exc}? {fim}
 "*"
 "/"
 "?"
-
+"("
+")"
+"=="
+"!="
+"<"
+"<="
+">"
+">="
+","
+"."
+";"
+":"
+"="
+"+="
+"-="
+"^"
 // Formatação
 :[\s\n\t]
