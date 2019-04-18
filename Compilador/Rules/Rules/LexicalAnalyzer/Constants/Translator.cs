@@ -9,15 +9,15 @@ namespace Rules.LexicalAnalyzer.Constants
 {
     public static class Translator
     {
-        public static string GetToken(int constant)
+        public static string GetToken(Token t)
         {
-            if (EhPalavraReservada(constant))
+            if (EhPalavraReservada(t.Lexeme))
                 return "palavra reservada";
 
-            if (EhSimboloEspecial(constant))
+            if (EhSimboloEspecial(t.Id))
                 return "símbolo especial";
 
-            switch (constant)
+            switch (t.Id)
             {
                 case Constants.t_identificador:
                     return "identificador";
@@ -38,24 +38,10 @@ namespace Rules.LexicalAnalyzer.Constants
             }
         }
 
-        private static bool EhPalavraReservada(int constant)
+        private static bool EhPalavraReservada(String lexeme)
         {
-            int[] palavrasReservadas = new int[]
-            {
-                Constants.t_and, Constants.t_begin,
-                Constants.t_bool, Constants.t_char,
-                Constants.t_end, Constants.t_false,
-                Constants.t_float, Constants.t_forward,
-                Constants.t_ifFalseDo, Constants.t_ifTrueDo,
-                Constants.t_int, Constants.t_main,
-                Constants.t_module, Constants.t_not,
-                Constants.t_not, Constants.t_or,
-                Constants.t_read, Constants.t_string,
-                Constants.t_true, Constants.t_whileTrueDo,
-                Constants.t_whileFalseDo, Constants.t_write
-            };
 
-            return palavrasReservadas.Contains(constant);
+            return ScannerConstants.SPECIAL_CASES_KEYS.Contains(lexeme);
         }
 
         private static bool EhSimboloEspecial(int constant)

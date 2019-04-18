@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rules.LexicalAnalyzer.Constants
 {
-    public class ScannerConstants
+    public abstract class ScannerConstants
     {
         public int[] SCANNER_TABLE_INDEXES =
     {
@@ -1116,8 +1116,7 @@ namespace Rules.LexicalAnalyzer.Constants
         public int[] SPECIAL_CASES_INDEXES =
             {0, 0, 0, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22  };
 
-        public string[] SPECIAL_CASES_KEYS =
-            {  "and", "begin", "bool", "char", "end", "false", "float", "forward", "ifFalseDo", "ifTrueDo", "int", "main", "module", "not", "or", "read", "string", "true", "voidentificador", "whileFalseDo", "whileTrueDo", "write" };
+        public static readonly string[] SPECIAL_CASES_KEYS = { "and", "begin", "bool", "char", "end", "false", "float", "forward", "ifFalseDo", "ifTrueDo", "int", "main", "module", "not", "or", "read", "string", "true", "voidentificador", "whileFalseDo", "whileTrueDo", "write" };
 
         public int[] SPECIAL_CASES_VALUES =
             {  8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 };
