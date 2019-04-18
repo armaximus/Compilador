@@ -12,7 +12,7 @@ namespace Rules
         public string Compile(string programa)
         {
             StringBuilder retorno = new StringBuilder();
-            
+
             Lexico lexico = new Lexico(programa.Trim());
 
             try
@@ -21,7 +21,8 @@ namespace Rules
 
                 while ((t = lexico.NextToken()) != null)
                 {
-                    retorno.AppendLine(string.Format("{0} {1}", GetLine(programa, t.Position), t.ToString()));
+                    if (t.Id != Constants.t_bloco)
+                        retorno.AppendLine(string.Format("{0} {1}", GetLine(programa, t.Position), t.ToString()));
                 }
 
                 if (retorno.Length > 0)

@@ -45,7 +45,7 @@ namespace Rules.LexicalAnalyzer.Constants
         }
 
         public Token NextToken()
-        {
+         {
             try
             {
                 if (!HasInput)
@@ -78,7 +78,7 @@ namespace Rules.LexicalAnalyzer.Constants
                     return NextToken();
                 else
                 {
-                    return new Token(token, GetLexeme(Input, start), start);
+                    return new Token(token, GetLexeme(Input, start, end), start);
                 }
             }
             catch (Exception ex)
@@ -87,9 +87,9 @@ namespace Rules.LexicalAnalyzer.Constants
             }
         }
 
-        private string GetLexeme(string input, int start)
+        private string GetLexeme(string input, int start, int end)
         {
-            return input.Substring(start, 1);
+            return input.Substring(start, (end - start));
         }
 
         private int NextState(char c, int state)
