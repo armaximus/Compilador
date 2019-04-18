@@ -1123,9 +1123,9 @@ namespace Rules.LexicalAnalyzer.Constants
 
         public string[] SCANNER_ERROR =
         {
-          "Caractere não esperado",
+        "símbolo inválido",
         "",
-        "Erro identificando \"!=\"",
+        "símbolo inválido \"!=\"",
         "Erro identificando constanteString",
         "Erro identificando bloco",
         "",
