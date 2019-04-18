@@ -32,8 +32,7 @@ namespace Rules
             }
             catch (LexicalError e)
             {
-                // TODO : Trazer o token
-                return string.Format("Erro na linha {0} - {1}.", GetLine(programa, e.Position), e.Message);
+                return string.Format("Erro na linha {0}: {1}.", GetLine(programa, e.Position), e.Message);
             }
 
             return retorno.ToString().Trim();

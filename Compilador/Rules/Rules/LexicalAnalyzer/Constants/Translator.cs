@@ -34,7 +34,7 @@ namespace Rules.LexicalAnalyzer.Constants
                 case Constants.t_voidentificador:
                     return "void entificador";
                 default:
-                    throw new Exception("Token não identificado");
+                    throw new LexicalError("Token não identificado");
             }
         }
 
