@@ -22,6 +22,7 @@ namespace Main
         public Principal()
         {
             InitializeComponent();
+            this.editor.Styles[Style.Default].Font = "Consolas";
         }
 
         private void Principal_Load(object sender, EventArgs e)
@@ -34,15 +35,15 @@ namespace Main
         {
             // Did the number of characters in the line number display change?
             // i.e. nnn VS nn, or nnnn VS nn, etc...
-            var maxLineNumberCharLength = this.editor.Lines.Count.ToString().Length;
-            if (maxLineNumberCharLength == this.maxLineNumberCharLength)
+            var _maxLineNumberCharLength = this.editor.Lines.Count.ToString().Length;
+            if (_maxLineNumberCharLength == this.maxLineNumberCharLength)
                 return;
 
             // Calculate the width required to display the last line number
             // and include some padding for good measure.
             const int padding = 2;
-            editor.Margins[0].Width = editor.TextWidth(Style.LineNumber, new string('9', maxLineNumberCharLength + 1)) + padding;
-            this.maxLineNumberCharLength = maxLineNumberCharLength;
+            editor.Margins[0].Width = editor.TextWidth(Style.LineNumber, new string('9', _maxLineNumberCharLength + 1)) + padding;
+            this.maxLineNumberCharLength = _maxLineNumberCharLength;
         }
        
         private void OnKeyDown(object sender, KeyEventArgs e)
