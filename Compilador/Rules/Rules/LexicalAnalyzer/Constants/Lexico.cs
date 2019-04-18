@@ -45,7 +45,7 @@ namespace Rules.LexicalAnalyzer.Constants
         }
 
         public Token NextToken()
-        {
+         {
             try
             {
                 if (!HasInput)
@@ -105,7 +105,7 @@ namespace Rules.LexicalAnalyzer.Constants
                     return SCANNER_TABLE[half, 1];
                 else if (SCANNER_TABLE[half, 0] < c)
                     start = half + 1;
-                else  //(SCANNER_TABLE[half, 0] > c)
+                else
                     end = half - 1;
             }
 
