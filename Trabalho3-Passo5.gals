@@ -1,0 +1,172 @@
+#Options
+GenerateScanner = true
+GenerateParser = true
+Language = Java
+ScannerName = Lexico
+ParserName = Sintatico
+SemanticName = Semantico
+ScannerCaseSensitive = true
+ScannerTable = Full
+Input = String
+Parser = SLR
+#RegularDefinitions
+mai : [A-Z]
+
+min : [a-z]
+
+dig : [0-9]
+
+letra : {mai} | {min}
+
+// Identificados
+sequenciaNMai : ({min} | {dig} | _)
+
+sequenciaIMai : {mai} ({sequenciaNMai}?)*
+
+sequenciaIMin : {min} ({mai}?({sequenciaNMai})+)*{mai}?
+
+// Bloco de comentario
+inicio : #\|
+
+fim : \|#
+
+exc : [^# \|]
+#Tokens
+// a: Identificador
+identificador : ({sequenciaIMai} | {sequenciaIMin})
+
+// b: Constante Inteira
+constanteInteira : 0 | ([1-9] | {dig}*)
+
+// c: Constante Real
+constanteReal : (0 | ([1-9] | {dig}*)) \. (0 | ({dig}* [1-9]))
+  
+// d: Constante String
+constanteString : \" [^\\ \n \"]* \"
+
+// e: Constante Caractere
+constanteCaractere : \\(\s|n|t)
+
+// f: Coment?rio de linha
+//comentarioLinha : [^\n]* 
+
+// g: Coment?rio bloco
+bloco : {inicio} {exc} ((#+ \|)? {exc})* {exc}? {fim}
+
+and = identificador : "and" 
+begin = identificador : "begin"
+bool = identificador : "bool"
+char = identificador : "char"
+end = identificador : "end"
+false = identificador : "false"
+float = identificador : "float"
+forward = identificador : "forward"
+ifFalseDo = identificador : "ifFalseDo"
+ifTrueDo = identificador : "ifTrueDo"
+int = identificador : "int"
+main = identificador : "main"
+module = identificador : "module"
+not = identificador : "not"
+or = identificador : "or"
+read = identificador : "read"
+string = identificador : "string"
+true = identificador : "true"
+void = identificador : "voidentificador"
+whileFalseDo = identificador : "whileFalseDo"
+whileTrueDo = identificador : "whileTrueDo"
+write = identificador : "write"
+// Simbolos especiais
+"+"
+"-"
+"*"
+"*"
+"/"
+"?"
+"("
+")"
+"=="
+"!="
+"<"
+"<="
+">"
+">="
+","
+"."
+";"
+":"
+"="
+"+="
+"-="
+"^"
+
+// Formata??o
+:[\s\n\t\r]
+#NonTerminals
+<program>
+<listaDeclaracoes>
+<listaModulos>
+<corpo>
+<declaracao>
+<tipoModulo>
+<listaParametrosFormais>
+<tipo>
+<parametrosFormais>
+<parametro>
+<listaIdentificadores>
+<modulo>
+<declaracaoVariaveis>
+<listaComandos>
+<comando>
+<atribuicao>
+<entradaDados>
+<saidaDados>
+<selecao>
+<repeticao>
+<retornoModulo>
+<variavel>
+<operadorAtribuicao>
+<expressao>
+<listaExpressoes>
+<selecaoOpcional>
+<tipoCondicao>
+
+
+
+
+#Grammar
+<program> ::= main <listaDeclaracoes> <listaModulos> begin <corpo> end ;
+<listaDeclaracoes> ::= î | <declaracao> <listaDeclaracoes> ;
+<listaModulos> ::= î | <modulo> | <listaModulos> ;
+
+<declaracao> ::= forward module <tipoModulo> identificador "(" <listaParametrosFormais> ")" ;
+<tipoModulo> ::= <tipo> | void ;
+<listaParametrosFormais> ::= î | <parametrosFormais> ;
+<parametrosFormais> ::= <parametro> | <parametro> ";" <parametrosFormais> ;
+<parametro> ::=  <tipo> ":" <listaIdentificadores> ;
+<tipo> ::= int | float | bool | char | string ;
+<listaIdentificadores> ::= identificador | identificador "," <listaIdentificadores> ;
+
+<modulo> ::= module identificador begin <corpo> end ;
+
+<corpo> ::= <declaracaoVariaveis> <listaComandos> ;
+<declaracaoVariaveis> ::= î | <variavel> <declaracaoVariaveis> ;
+<variavel> ::= <tipo> ":" <listaIdentificadores>"." ;
+<listaComandos> ::= <comando>"." | <comando>"." <listaComandos> ;
+<comando> ::= <atribuicao> | <entradaDados> | <saidaDados> | <selecao> | <repeticao> | <retornoModulo> ;
+
+<atribuicao> ::= identificador <operadorAtribuicao> <expressao> ;
+<operadorAtribuicao> ::= "=" | "+=" | "-=" ;
+
+<entradaDados> ::= read "(" <listaIdentificadores> ")" ;
+
+<saidaDados> ::= write "(" <listaExpressoes> ")" ;
+<listaExpressoes> ::= <expressao> | <expressao> "," <listaExpressoes> ;
+
+<selecao> ::= "(" <expressao> ")" ifTrueDo <listaComandos> <selecaoOpcional> end ;
+<selecaoOpcional> ::= î | ifFalseDo <listaComandos> ;
+
+<repeticao> ::= "(" <expressao> ")" <tipoCondicao> <listaComandos> end ;
+<tipoCondicao> ::= whileTrueDo | whileFalseDo ;
+
+<retornoModulo> ::= "^"<expressao> ;
+
