@@ -1,15 +1,14 @@
 ﻿using Rules.LexicalAnalyzer.Exceptions;
+using Rules.LexicalAnalyzer.Constants;
 using System;
 
-namespace Rules.LexicalAnalyzer.Constants
+namespace Rules.LexicalAnalyzer
 {
-    public class Lexico : Constants
+    public class Lexico : Constants.Constants
     {
         private int Position { get; set; }
 
         private string Input { get; set; }
-
-        private int CurrentConstant { get; set; }
 
         private bool HasInput
         {
