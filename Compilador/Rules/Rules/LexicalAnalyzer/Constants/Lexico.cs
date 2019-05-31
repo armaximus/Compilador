@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Rules.LexicalAnalyzer.Exceptions;
+﻿using Rules.LexicalAnalyzer.Exceptions;
+using System;
 
 namespace Rules.LexicalAnalyzer.Constants
 {
@@ -45,7 +41,7 @@ namespace Rules.LexicalAnalyzer.Constants
         }
 
         public Token NextToken()
-         {
+        {
             try
             {
                 if (!HasInput)
@@ -78,13 +74,37 @@ namespace Rules.LexicalAnalyzer.Constants
                     return NextToken();
                 else
                 {
-                    return new Token(token, GetLexeme(Input, start, end), start);
+                    string lexeme = GetLexeme(Input, start, end);
+                    token = LookupToken(token, lexeme);
+
+                    return new Token(token, lexeme, start);
                 }
             }
             catch (Exception ex)
             {
                 throw new LexicalError(ex.Message, Position);
             }
+        }
+
+        private int LookupToken(int token, string key)
+        {
+            int start = SPECIAL_CASES_INDEXES[token];
+            int end = SPECIAL_CASES_INDEXES[token + 1] - 1;
+
+            while (start <= end)
+            {
+                int half = (start + end) / 2;
+                int comp = SPECIAL_CASES_KEYS[half].CompareTo(key);
+
+                if (comp == 0)
+                    return SPECIAL_CASES_VALUES[half];
+                else if (comp < 0)
+                    start = half + 1;
+                else
+                    end = half - 1;
+            }
+
+            return token;
         }
 
         private string GetLexeme(string input, int start, int end)

@@ -1,61 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Rules.LexicalAnalyzer.Constants
+﻿namespace Rules.LexicalAnalyzer.Constants
 {
     public abstract class ScannerConstants
     {
-        public int[] SCANNER_TABLE_INDEXES =
-    {
-         0,
-        85,
-        85,
-        86,
-        277,
-        278,
-        278,
-        278,
-        278,
-        279,
-        279,
-        280,
-        290,
-        290,
-        301,
-        301,
-        301,
-        302,
-        303,
-        304,
-        304,
-        341,
-        344,
-        344,
-        407,
-        407,
-        407,
-        598,
-        598,
-        598,
-        608,
-        618,
-        618,
-        618,
-        618,
-        618,
-        655,
-        848,
-        858,
-        860,
-        861,
-        1052,
-        1052
+        public readonly int[] SCANNER_TABLE_INDEXES =
+        {
+             0,
+            85,
+            85,
+            86,
+            277,
+            278,
+            278,
+            278,
+            278,
+            279,
+            279,
+            280,
+            290,
+            290,
+            301,
+            301,
+            301,
+            302,
+            303,
+            304,
+            304,
+            341,
+            344,
+            344,
+            407,
+            407,
+            407,
+            598,
+            598,
+            598,
+            608,
+            618,
+            618,
+            618,
+            618,
+            618,
+            655,
+            848,
+            858,
+            860,
+            861,
+            1052,
+            1052
         };
 
-        public int[,] SCANNER_TABLE =
+        public readonly int[,] SCANNER_TABLE =
         {
        {9, 1},
         {10, 1},
@@ -1111,60 +1105,60 @@ namespace Rules.LexicalAnalyzer.Constants
         {255, 36}
     };
 
-        public int[] TOKEN_STATE = { 3, 0, -1, -1, -1, 35, 36, 32, 30, 43, 31, 44, 33, 3, 46, 45, 39, 47, 41, 34, 2, -1, 50, 2, 38, 5, -1, 48, 49, 4, -1, 40, 37, 42, 6, 2, -1, -1, -1, -1, -1, 7 };
+        public readonly int[] TOKEN_STATE = { 3, 0, -1, -1, -1, 35, 36, 32, 30, 43, 31, 44, 33, 3, 46, 45, 39, 47, 41, 34, 2, -1, 50, 2, 38, 5, -1, 48, 49, 4, -1, 40, 37, 42, 6, 2, -1, -1, -1, -1, -1, 7 };
 
-        public int[] SPECIAL_CASES_INDEXES =
+        public readonly int[] SPECIAL_CASES_INDEXES =
             {0, 0, 0, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22  };
 
         public static readonly string[] SPECIAL_CASES_KEYS = { "and", "begin", "bool", "char", "end", "false", "float", "forward", "ifFalseDo", "ifTrueDo", "int", "main", "module", "not", "or", "read", "string", "true", "voidentificador", "whileFalseDo", "whileTrueDo", "write" };
 
-        public int[] SPECIAL_CASES_VALUES =
+        public readonly int[] SPECIAL_CASES_VALUES =
             {  8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 };
 
-        public string[] SCANNER_ERROR =
+        public readonly string[] SCANNER_ERROR =
         {
-        "símbolo inválido",
-        "",
-        "símbolo inválido \"!=\"",
-        "Erro identificando constanteString",
-        "Erro identificando bloco",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "Erro identificando constanteCaractere",
-        "",
-        "",
-        "",
-        "",
-        "Erro identificando bloco",
-        "",
-        "",
-        "",
-        "Erro identificando constanteReal",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "Erro identificando bloco",
-        "Erro identificando constanteReal",
-        "Erro identificando bloco",
-        "Erro identificando bloco",
-        "Erro identificando bloco",
-        ""
-    };
+            "símbolo inválido",
+            string.Empty,
+            "símbolo inválido \"!=\"",
+            "Erro identificando constanteString",
+            "Erro identificando bloco",
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            "Erro identificando constanteCaractere",
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            "Erro identificando bloco",
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            "Erro identificando constanteReal",
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            string.Empty,
+            "Erro identificando bloco",
+            "Erro identificando constanteReal",
+            "Erro identificando bloco",
+            "Erro identificando bloco",
+            "Erro identificando bloco",
+            string.Empty
+        };
     }
 }

@@ -1,9 +1,6 @@
 ﻿using Rules.LexicalAnalyzer.Exceptions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Rules.LexicalAnalyzer.Constants
 {
@@ -29,10 +26,8 @@ namespace Rules.LexicalAnalyzer.Constants
                     return "constante string";
                 case Constants.t_constanteCaractere:
                     return "constante caractere";
-                case Constants.t_bloco:
-                    return "bloco";
-                case Constants.t_voidentificador:
-                    return "void entificador";
+                case Constants.t_void:
+                    return "void";
                 default:
                     throw new LexicalError("Token não identificado");
             }
@@ -57,8 +52,7 @@ namespace Rules.LexicalAnalyzer.Constants
                 Constants.t_TOKEN_42, Constants.t_TOKEN_43,
                 Constants.t_TOKEN_44, Constants.t_TOKEN_45,
                 Constants.t_TOKEN_46, Constants.t_TOKEN_47,
-                Constants.t_TOKEN_48, Constants.t_TOKEN_49,
-                Constants.t_TOKEN_50
+                Constants.t_TOKEN_48, Constants.t_TOKEN_29
             };
 
             return simbolosEspeciais.Contains(constant);
