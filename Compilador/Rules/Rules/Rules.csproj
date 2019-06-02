@@ -44,13 +44,16 @@
     <Compile Include="Compiler.cs" />
     <Compile Include="FileManager.cs" />
     <Compile Include="LexicalAnalyzer\Constants\Constants.cs" />
-    <Compile Include="LexicalAnalyzer\Constants\Lexico.cs" />
+    <Compile Include="LexicalAnalyzer\Lexico.cs" />
+    <Compile Include="LexicalAnalyzer\Constants\ParserConstants.cs" />
     <Compile Include="LexicalAnalyzer\Constants\Translator.cs" />
     <Compile Include="LexicalAnalyzer\Exceptions\AnalysisError.cs" />
     <Compile Include="LexicalAnalyzer\Exceptions\LexicalError.cs" />
     <Compile Include="LexicalAnalyzer\Exceptions\SemanticError.cs" />
     <Compile Include="LexicalAnalyzer\Exceptions\SyntaticError.cs" />
     <Compile Include="LexicalAnalyzer\Constants\ScannerConstants.cs" />
+    <Compile Include="LexicalAnalyzer\Semantico.cs" />
+    <Compile Include="LexicalAnalyzer\Sintatico.cs" />
     <Compile Include="LexicalAnalyzer\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
