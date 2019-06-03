@@ -1509,13 +1509,11 @@
 
         public readonly string[] SCANNER_ERROR =
         {
-            "Caractere não esperado",
+            "caractere não esperado",
             string.Empty,
-            "Erro identificando \"!=\"",
-            "constante string inválida", // "Erro identificando constanteString",
-            "Erro identificando <ignorar>",
-            string.Empty,
-            string.Empty,
+            "erro identificando \"!=\"",
+            "constante string inválida", // "Erro identificando constanteString"
+            "comentário inválido", // "Erro identificando <ignorar>"
             string.Empty,
             string.Empty,
             string.Empty,
@@ -1530,28 +1528,30 @@
             string.Empty,
             string.Empty,
             string.Empty,
-            "Erro identificando constanteCaractere",
+            string.Empty,
+            string.Empty,
+            "constante caractere inválida", // "Erro identificando constanteCaractere"
             string.Empty,
             string.Empty,
             string.Empty,
             string.Empty,
-            "Erro identificando <ignorar>",
+            "comentário inválido", // "Erro identificando <ignorar>"
             string.Empty,
             string.Empty,
             string.Empty,
-            "Erro identificando constanteReal",
+            "constante real inválida", // "Erro identificando constanteReal"
             string.Empty,
             string.Empty,
             string.Empty,
             string.Empty,
             string.Empty,
             string.Empty,
-            "Erro identificando <ignorar>",
+            "comentário inválido", // "Erro identificando <ignorar>"
             string.Empty,
-            "Erro identificando <ignorar>",
-            "Erro identificando <ignorar>",
-            "Erro identificando constanteReal",
-            "Erro identificando <ignorar>",
+            "comentário inválido", // "Erro identificando <ignorar>"
+            "comentário inválido", // "Erro identificando <ignorar>"
+            "constante real inválida", // "Erro identificando constanteReal"
+            "comentário inválido", // "Erro identificando <ignorar>"
             string.Empty
         };
     }

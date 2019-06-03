@@ -13,8 +13,8 @@ namespace Rules
 
             programa = programa.Trim();
 
-            if (programa.Length == 0)
-                return "Nenhum programa para compilar";
+            if (string.IsNullOrWhiteSpace(programa))
+                return "Nenhum programa para compilar.";
 
             try
             {
@@ -30,7 +30,7 @@ namespace Rules
             }
             catch (LexicalException ex)
             {
-                return string.Format("Erro na linha {0}: {1}.", GetLine(programa, ex.Position), ex.Message);
+                return string.Format("Erro na linha {0}: {1}", GetLine(programa, ex.Position), ex.Message);
             }
             catch (SyntaticException ex)
             {
