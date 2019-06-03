@@ -148,7 +148,7 @@
         public readonly string[] PARSER_ERROR =
         {
             string.Empty,
-            "esperado fim de programa",
+            "esperado fim de arquivo", //"esperado fim de programa"
             "esperado identificador",
             "esperado constante inteira", // constanteInteira
             "esperado constanteReal", //constanteReal
