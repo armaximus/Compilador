@@ -1,5 +1,4 @@
 ﻿using Rules.LexicalAnalyzer;
-using Rules.LexicalAnalyzer.Constants;
 using Rules.LexicalAnalyzer.Exceptions;
 using System.Text;
 
@@ -26,28 +25,27 @@ namespace Rules
             {
                 sintatico.Parse(lexico, semantico);
 
-                Token t = null;
+                Token t = lexico.NextToken();
 
-                while ((t = lexico.NextToken()) != null)
+                while (t != null)
                 {
-                    //if (t.Id != Constants.t_bloco)
-                     //retorno.AppendLine(string.Format("{0} {1}", GetLine(programa, t.Position), t.ToString()));
+                    t = lexico.NextToken();
                 }
 
-                //if (retorno.Length > 0)
-                //retorno.AppendLine();
+                if (retorno.Length > 0)
+                    retorno.AppendLine();
 
                 retorno.AppendLine("Programa compilado com sucesso.");
 
             }
             catch (LexicalException e)
             {
-                return string.Format("Erro na linha {0}: {1}.", GetLine(programa, e.Position), e.Data, e.Message);
+                return string.Format("Erro na linha {0}: {1} {2}.", GetLine(programa, e.Position), e.Data, e.Message);
             }
-            catch (SyntaticError e)
+            catch (SyntaticException e)
             {
                 //TO DO - PEGAR O QUE FOI ENCONTRADO
-                return string.Format("Erro na linha {0} - encontrado {1}  {2}.", GetLine(programa, e.Position), "", e.Message);
+                return string.Format("Erro na linha {0} - encontrado {1}  {2}.", GetLine(programa, e.Position), string.Empty, e.Message);
             }
 
             return retorno.ToString().Trim();
