@@ -30,22 +30,24 @@ namespace Rules
 
                 while ((t = lexico.NextToken()) != null)
                 {
-                    // if (t.Id != Constants.t_bloco)
-                    retorno.AppendLine(string.Format("{0} {1}", GetLine(programa, t.Position), t.ToString()));
+                    //if (t.Id != Constants.t_bloco)
+                     //retorno.AppendLine(string.Format("{0} {1}", GetLine(programa, t.Position), t.ToString()));
                 }
 
-                if (retorno.Length > 0)
-                    retorno.AppendLine();
+                //if (retorno.Length > 0)
+                //retorno.AppendLine();
 
                 retorno.AppendLine("Programa compilado com sucesso.");
+
             }
             catch (LexicalError e)
             {
-                return string.Format("Erro na linha {0}: {1}.", GetLine(programa, e.Position), e.Message);
+                return string.Format("Erro na linha {0}: {1}.", GetLine(programa, e.Position), e.Data, e.Message);
             }
             catch (SyntaticError e)
             {
-                return string.Format("Erro na linha {0}: {1}.", GetLine(programa, e.Position), e.Message);
+                //TO DO - PEGAR O QUE FOI ENCONTRADO
+                return string.Format("Erro na linha {0} - encontrado {1}  {2}.", GetLine(programa, e.Position), "", e.Message);
             }
 
             return retorno.ToString().Trim();
