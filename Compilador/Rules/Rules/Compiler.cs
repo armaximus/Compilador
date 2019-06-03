@@ -1,5 +1,6 @@
 ﻿using Rules.LexicalAnalyzer;
 using Rules.LexicalAnalyzer.Exceptions;
+using System;
 using System.Text;
 
 namespace Rules
@@ -8,47 +9,47 @@ namespace Rules
     {
         public string Compile(string programa)
         {
-            StringBuilder retorno = new StringBuilder();
-
-            Lexico lexico = new Lexico(programa.Trim());
-
             Sintatico sintatico = new Sintatico();
 
-            Semantico semantico = new Semantico();
+            programa = programa.Trim();
 
-            if (programa.Trim().Length == 0)
-            {
+            if (programa.Length == 0)
                 return "Nenhum programa para compilar";
-            }
 
             try
             {
+                Lexico lexico = new Lexico(programa);
+                Semantico semantico = new Semantico();
+
                 sintatico.Parse(lexico, semantico);
 
-                Token t = lexico.NextToken();
+                ProcessarPrograma(lexico);
 
-                while (t != null)
-                {
-                    t = lexico.NextToken();
-                }
-
-                if (retorno.Length > 0)
-                    retorno.AppendLine();
-
-                retorno.AppendLine("Programa compilado com sucesso.");
+                return "Programa compilado com sucesso.";
 
             }
-            catch (LexicalException e)
+            catch (LexicalException ex)
             {
-                return string.Format("Erro na linha {0}: {1} {2}.", GetLine(programa, e.Position), e.Data, e.Message);
+                return string.Format("Erro na linha {0}: {1}.", GetLine(programa, ex.Position), ex.Message);
             }
-            catch (SyntaticException e)
+            catch (SyntaticException ex)
             {
-                //TO DO - PEGAR O QUE FOI ENCONTRADO
-                return string.Format("Erro na linha {0} - encontrado {1}  {2}.", GetLine(programa, e.Position), string.Empty, e.Message);
+                return string.Format("Erro na linha {0} - encontrado \"{1}\", esperado {2}", GetLine(programa, ex.Position), sintatico.CurrentToken.Lexeme, ex.Message);
             }
+            catch (Exception ex)
+            {
+                return string.Format("Erro desconhecido: {0}", ex.Message);
+            }
+        }
 
-            return retorno.ToString().Trim();
+        private void ProcessarPrograma(Lexico lexico)
+        {
+            Token t = lexico.NextToken();
+
+            while (t != null)
+            {
+                t = lexico.NextToken();
+            }
         }
 
         private int GetLine(string input, int position)

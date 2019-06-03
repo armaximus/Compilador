@@ -8,8 +8,8 @@ namespace Rules.LexicalAnalyzer
 {
     public class Sintatico : Constants.Constants
     {
+        public Token CurrentToken { get; private set; }
         private Stack Stack { get; set; }
-        private Token CurrentToken { get; set; }
         private Token PreviousToken { get; set; }
         private Lexico Scanner { get; set; }
         private Semantico SemanticAnalyser { get; set; }
@@ -90,11 +90,11 @@ namespace Rules.LexicalAnalyzer
             if (p >= 0)
             {
                 int[] production = PRODUCTIONS[p];
-                //empilha a produção em ordem reversa
+
+                // Empilha a produção em ordem reversa
                 for (int i = production.Length - 1; i >= 0; i--)
-                {
                     Stack.Push(production[i]);
-                }
+
                 return true;
             }
             else
@@ -114,7 +114,7 @@ namespace Rules.LexicalAnalyzer
 
             while (!Step())
             {
-                // Por algum motivo o gals gerou sem nada dentro do laço
+                // Para verificar cada token
             }
         }
     }

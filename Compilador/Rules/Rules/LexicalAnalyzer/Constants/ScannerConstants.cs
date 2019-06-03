@@ -1512,7 +1512,7 @@
             "Caractere não esperado",
             string.Empty,
             "Erro identificando \"!=\"",
-            "Erro identificando constanteString",
+            "constante string inválida", // "Erro identificando constanteString",
             "Erro identificando <ignorar>",
             string.Empty,
             string.Empty,

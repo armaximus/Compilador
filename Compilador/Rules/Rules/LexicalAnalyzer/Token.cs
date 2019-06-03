@@ -17,7 +17,7 @@ namespace Rules.LexicalAnalyzer
 
         public override string ToString()
         {
-            return string.Format("{0}   {1}", Translator.GetToken(this), Lexeme);
+            return string.Format("{0} {1}", Translator.GetToken(this), Lexeme);
         }
     }
 }
