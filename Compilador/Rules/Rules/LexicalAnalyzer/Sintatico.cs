@@ -67,7 +67,7 @@ namespace Rules.LexicalAnalyzer
                 }
                 else
                 {
-                    throw new SyntaticError(PARSER_ERROR[x], CurrentToken.Position);
+                    throw new SyntaticException(PARSER_ERROR[x], CurrentToken.Position);
                 }
             }
             else if (IsNonTerminal(x))
@@ -75,7 +75,7 @@ namespace Rules.LexicalAnalyzer
                 if (PushProduction(x, a))
                     return false;
                 else
-                    throw new SyntaticError(PARSER_ERROR[x], CurrentToken.Position);
+                    throw new SyntaticException(PARSER_ERROR[x], CurrentToken.Position);
             }
             else // IsSemanticAction(x)
             {

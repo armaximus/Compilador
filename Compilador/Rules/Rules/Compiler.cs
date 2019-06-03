@@ -40,7 +40,7 @@ namespace Rules
                 retorno.AppendLine("Programa compilado com sucesso.");
 
             }
-            catch (LexicalError e)
+            catch (LexicalException e)
             {
                 return string.Format("Erro na linha {0}: {1}.", GetLine(programa, e.Position), e.Data, e.Message);
             }

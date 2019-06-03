@@ -2,15 +2,15 @@
 
 namespace Rules.LexicalAnalyzer.Exceptions
 {
-    public class AnalysisError : Exception
+    public class AnalysisException : Exception
     {
         public int Position { get; private set; }
 
-        public AnalysisError(string message) : this(message, -1)
+        public AnalysisException(string message) : this(message, -1)
         {
         }
 
-        public AnalysisError(string message, int position) : base(message)
+        public AnalysisException(string message, int position) : base(message)
         {
             this.Position = position;
         }

@@ -63,7 +63,7 @@ namespace Rules.LexicalAnalyzer
                 }
 
                 if (endState < 0 || (endState != state && TokenForState(lastState) == -2))
-                    throw new LexicalError(SCANNER_ERROR[lastState], start);
+                    throw new LexicalException(SCANNER_ERROR[lastState], start);
 
                 Position = end;
 
@@ -81,7 +81,7 @@ namespace Rules.LexicalAnalyzer
             }
             catch (Exception ex)
             {
-                throw new LexicalError(ex.Message, Position);
+                throw new LexicalException(ex.Message, Position);
             }
         }
 

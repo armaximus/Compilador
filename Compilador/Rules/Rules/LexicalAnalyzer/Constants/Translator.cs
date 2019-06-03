@@ -29,7 +29,7 @@ namespace Rules.LexicalAnalyzer.Constants
                 case Constants.t_void:
                     return "void";
                 default:
-                    throw new LexicalError("Token não identificado");
+                    throw new LexicalException("Token não identificado");
             }
         }
 

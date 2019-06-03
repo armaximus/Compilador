@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Rules.LexicalAnalyzer.Exceptions
 {
-    public class SemanticError : AnalysisError
+    public class SyntaticException : AnalysisException
     {
-        public SemanticError(string message, int position) : base(message, position)
+        public SyntaticException(string message, int position) : base(message, position)
         {
         }
 
-        public SemanticError(string message) : base(message)
+        public SyntaticException(string message) : base(message)
         {
         }
     }

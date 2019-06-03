@@ -47,10 +47,10 @@
     <Compile Include="LexicalAnalyzer\Lexico.cs" />
     <Compile Include="LexicalAnalyzer\Constants\ParserConstants.cs" />
     <Compile Include="LexicalAnalyzer\Constants\Translator.cs" />
-    <Compile Include="LexicalAnalyzer\Exceptions\AnalysisError.cs" />
-    <Compile Include="LexicalAnalyzer\Exceptions\LexicalError.cs" />
-    <Compile Include="LexicalAnalyzer\Exceptions\SemanticError.cs" />
-    <Compile Include="LexicalAnalyzer\Exceptions\SyntaticError.cs" />
+    <Compile Include="LexicalAnalyzer\Exceptions\AnalysisException.cs" />
+    <Compile Include="LexicalAnalyzer\Exceptions\LexicalException.cs" />
+    <Compile Include="LexicalAnalyzer\Exceptions\SemanticException.cs" />
+    <Compile Include="LexicalAnalyzer\Exceptions\SyntaticException.cs" />
     <Compile Include="LexicalAnalyzer\Constants\ScannerConstants.cs" />
     <Compile Include="LexicalAnalyzer\Semantico.cs" />
     <Compile Include="LexicalAnalyzer\Sintatico.cs" />
