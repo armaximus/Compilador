@@ -13,8 +13,19 @@ namespace Rules
 
             Lexico lexico = new Lexico(programa.Trim());
 
+            Sintatico sintatico = new Sintatico();
+
+            Semantico semantico = new Semantico();
+
+            if (programa.Trim().Length == 0)
+            {
+                return "Nenhum programa para compilar";
+            }
+
             try
             {
+                sintatico.Parse(lexico, semantico);
+
                 Token t = null;
 
                 while ((t = lexico.NextToken()) != null)
@@ -29,6 +40,10 @@ namespace Rules
                 retorno.AppendLine("Programa compilado com sucesso.");
             }
             catch (LexicalError e)
+            {
+                return string.Format("Erro na linha {0}: {1}.", GetLine(programa, e.Position), e.Message);
+            }
+            catch (SyntaticError e)
             {
                 return string.Format("Erro na linha {0}: {1}.", GetLine(programa, e.Position), e.Message);
             }
