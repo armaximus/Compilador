@@ -34,7 +34,7 @@ namespace Rules
             }
             catch (SyntaticException ex)
             {
-                return string.Format("Erro na linha {0} - encontrado \"{1}\", esperado {2}", GetLine(programa, ex.Position), sintatico.CurrentToken.Lexeme, ex.Message);
+                return string.Format("Erro na linha {0}: encontrado {1} esperado {2}", GetLine(programa, ex.Position), sintatico.CurrentToken.Lexeme, ex.Message);
             }
             catch (Exception ex)
             {
