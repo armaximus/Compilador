@@ -6,9 +6,9 @@ ScannerName = Lexico
 ParserName = Sintatico
 SemanticName = Semantico
 ScannerCaseSensitive = true
-ScannerTable = Full
-Input = Stream
-Parser = SLR
+ScannerTable = Compact
+Input = String
+Parser = LL
 #RegularDefinitions
 mai : [A-Z]
 
@@ -21,7 +21,7 @@ letra : {mai} | {min}
 // Identificados
 sequenciaNMai : ({min} | {dig} | _)
 
-sequenciaIMai : {mai} ({sequenciaNMai}?)*
+sequenciaIMai : {mai} ({sequenciaNMai}{mai}?)*
 
 sequenciaIMin : {min} ({mai}?({sequenciaNMai})+)*{mai}?
 
@@ -36,22 +36,22 @@ exc : [^# \|]
 identificador : ({sequenciaIMai} | {sequenciaIMin})
 
 // b: Constante Inteira
-constanteInteira : 0 | ([1-9] | {dig}*)
+constanteInteira : 0 | ([1-9] {dig}*)
 
 // c: Constante Real
-constanteReal : (0 | ([1-9] | {dig}*)) \. (0 | ({dig}* [1-9]))
+constanteReal : (0 | ([1-9] {dig}*)) \. (0 | ({dig}* [1-9]))
   
 // d: Constante String
 constanteString : \" [^\\ \n \"]* \"
 
 // e: Constante Caractere
-constanteCaractere : \\(\s|n|t)
+constanteCaractere : \\(s|n|t)
 
 // f: Coment?rio de linha
-//comentarioLinha : [^\n]* 
+:! / / [^\n]* 
 
 // g: Comentário bloco
-bloco : {inicio} {exc} ((#+ \|)? {exc})* {exc}? {fim}
+:! {inicio} {exc} ((#+ \|)? {exc})* {exc}? {fim}
 
 and = identificador : "and" 
 begin = identificador : "begin"
@@ -71,7 +71,7 @@ or = identificador : "or"
 read = identificador : "read"
 string = identificador : "string"
 true = identificador : "true"
-void = identificador : "voidentificador"
+void = identificador : "void"
 whileFalseDo = identificador : "whileFalseDo"
 whileTrueDo = identificador : "whileTrueDo"
 write = identificador : "write"
@@ -79,9 +79,7 @@ write = identificador : "write"
 "+"
 "-"
 "*"
-"*"
 "/"
-"?"
 "("
 ")"
 "=="
@@ -117,11 +115,10 @@ write = identificador : "write"
 <declaracaoVariaveis>
 <listaComandos>
 <comando>
+<comando1>
 <atribuicao>
 <entradaDados>
 <saidaDados>
-<selecao>
-<repeticao>
 <retornoModulo>
 <variavel>
 <operadorAtribuicao>
@@ -142,8 +139,9 @@ write = identificador : "write"
 <expressao1>
 <aritmetica1>
 <termo1>
-
-
+<fator1>
+<fator2>
+<relacional1>
 #Grammar
 <program> ::= main <listaDeclaracoes> <listaModulos> begin <corpo> end ;
 <listaDeclaracoes> ::= î | <declaracao> <listaDeclaracoes> ;
@@ -166,7 +164,9 @@ write = identificador : "write"
 <variavel> ::= <tipo> ":" <listaIdentificadores>"." ;
 <listaComandos> ::= <comando>"." <listaComandos1> ;
 <listaComandos1> ::= î | <listaComandos> ;
-<comando> ::= <atribuicao> | <entradaDados> | <saidaDados> | <selecao> | <repeticao> | <retornoModulo> ;
+<comando> ::= <atribuicao> | <entradaDados> | <saidaDados> | <retornoModulo> |    "(" <expressao> ")" <comando1> ;            
+<comando1> ::=  ifTrueDo <listaComandos> <selecaoOpcional> end |    // selecao
+	       <tipoCondicao> <listaComandos> end ;    // repeticao
 
 <atribuicao> ::= identificador <operadorAtribuicao> <expressao> ;
 <operadorAtribuicao> ::= "=" | "+=" | "-=" ;
@@ -176,31 +176,31 @@ write = identificador : "write"
 <saidaDados> ::= write "(" <listaExpressoes> ")" ;
 <listaExpressoes> ::= <expressao> <listaExpressoes1> ;
 <listaExpressoes1> ::= î | "," <listaExpressoes> ;
-<selecao> ::= "(" <expressao> ")" ifTrueDo <listaComandos> <selecaoOpcional> end ;
 <selecaoOpcional> ::= î | ifFalseDo <listaComandos> ;
 
-<repeticao> ::= "(" <expressao> ")" <tipoCondicao> <listaComandos> end ;
 <tipoCondicao> ::= whileTrueDo | whileFalseDo ;
 
 <retornoModulo> ::= "^"<expressao> ;
 
-<expressao> ::=  <expressao1> <elemento> ;
-<expressao1> ::= <expressao> and | <expressao> or  |  î;
+<expressao> ::=  <elemento> <expressao1>;
+<expressao1> ::= î | and <elemento> <expressao1> | or <elemento> <expressao1>;
 <elemento> ::= <relacional> | true | false | not <elemento> ;
-<relacional> ::= <aritmética> <operadorRelacional> <aritmética> | <aritmética> ;
+<relacional> ::= <aritmética> <relacional1> ;
+<relacional1> ::= <operadorRelacional> <aritmética> | î ;
 <operadorRelacional> ::= "==" | "!=" | "<" | "<=" | ">"  | ">=" ;
-<aritmética> ::= <aritmetica1> <termo>;
-<aritmetica1> ::= "+" <termo> | "-" <termo> | î;
-<termo> ::= <termo1> <fator>;
-<termo1> ::= "*" <fator> | "/" <fator> | î; 
-<fator> ::= identificador | 
-             identificador "(" ")" |
-             identificador "(" <listaExpressoes> ")" |
-	    constanteInteira |
+<aritmética> ::= <termo> <aritmetica1>;
+<aritmetica1> ::= "+" <termo> <aritmetica1> | "-" <termo> <aritmetica1> | î;
+<termo> ::= <fator> <termo1>;
+<termo1> ::= "*" <fator> <termo1> | "/"<fator> <termo1> | î; 
+<fator> ::= identificador <fator1> | 
+             constanteInteira |
              constanteReal |
-	    constanteCaractere |
+             constanteCaractere |
              constanteString |
              "(" <expressao> ")" |
-	    "+" <fator> |
-	    "-" <fator>;
+             "+" <fator> |
+             "-" <fator>;
+
+<fator1> ::= î | "(" <fator2> ")";
+<fator2> ::= <listaExpressoes> | î ;
 

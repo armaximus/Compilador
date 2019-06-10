@@ -139,9 +139,11 @@ write = identificador : "write"
 <operadorRelacional>
 <termo>
 <fator>
-
-
-
+<expressao1>
+<aritmetica1>
+<termo1>
+<fator1>
+<relacional1>
 #Grammar
 <program> ::= main <listaDeclaracoes> <listaModulos> begin <corpo> end ;
 <listaDeclaracoes> ::= î | <declaracao> <listaDeclaracoes> ;
@@ -182,20 +184,24 @@ write = identificador : "write"
 
 <retornoModulo> ::= "^"<expressao> ;
 
-<expressao> ::= <expressao> and <elemento> | <expressao> or <elemento> | <elemento> ;
+<expressao> ::=  <expressao1> <elemento> ;
+<expressao1> ::= <expressao> and | <expressao> or  |  î;
 <elemento> ::= <relacional> | true | false | not <elemento> ;
-<relacional> ::= <aritmética> <operadorRelacional> <aritmética> | <aritmética> ;
+<relacional> ::= <aritmética> <relacional1> ;
+<relacional1> ::= <operadorRelacional> <aritmética> | î ;
 <operadorRelacional> ::= "==" | "!=" | "<" | "<=" | ">"  | ">=" ;
-<aritmética> ::= <aritmética> "+" <termo> | <aritmética> "-" <termo> | <termo>;
-<termo> ::= <termo> "*" <fator> | <termo> "/" <fator> | <fator>;
-<fator> ::= identificador | 
-             identificador "(" ")" |
-             identificador "(" <listaExpressoes> ")" |
-	    constanteInteira |
+<aritmética> ::= <termo> <aritmetica1>;
+<aritmetica1> ::= "+" <termo> | "-" <termo> | î;
+<termo> ::= <termo1> <fator>;
+<termo1> ::= <termo> "*" | <termo> "/" | î; 
+<fator> ::= identificador <fator1> | 
+             constanteInteira |
              constanteReal |
-	    constanteCaractere |
+             constanteCaractere |
              constanteString |
              "(" <expressao> ")" |
-	    "+" <fator> |
-	    "-" <fator>;
+             "+" <fator> |
+             "-" <fator>;
+
+<fator1> ::= î | "(" ")" | "(" <listaExpressoes> ")";
 
