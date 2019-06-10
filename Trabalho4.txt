@@ -143,7 +143,7 @@ write = identificador : "write"
 <fator2>
 <relacional1>
 #Grammar
-<program> ::= main <listaDeclaracoes> <listaModulos> begin <corpo> end ;
+<program> ::= #15 main <listaDeclaracoes> <listaModulos> #16 begin <corpo> end #17 ;
 <listaDeclaracoes> ::= î | <declaracao> <listaDeclaracoes> ;
 <listaModulos> ::= î | <modulo> <listaModulos> ;
 
@@ -174,7 +174,7 @@ write = identificador : "write"
 <entradaDados> ::= read "(" <listaIdentificadores> ")" ;
 
 <saidaDados> ::= write "(" <listaExpressoes> ")" ;
-<listaExpressoes> ::= <expressao> <listaExpressoes1> ;
+<listaExpressoes> ::= <expressao> #14 <listaExpressoes1> ;
 <listaExpressoes1> ::= î | "," <listaExpressoes> ;
 <selecaoOpcional> ::= î | ifFalseDo <listaComandos> ;
 
