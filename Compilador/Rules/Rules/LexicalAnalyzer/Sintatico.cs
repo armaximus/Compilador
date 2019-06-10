@@ -42,7 +42,7 @@ namespace Rules.LexicalAnalyzer
                 if (PreviousToken != null)
                     pos = PreviousToken.Position + PreviousToken.Lexeme.Length;
 
-                CurrentToken = new Token(DOLLAR, "$", pos);
+                CurrentToken = new Token(DOLLAR, "fim de arquivo", pos);
             }
 
             int x = ((int)Stack.Pop());

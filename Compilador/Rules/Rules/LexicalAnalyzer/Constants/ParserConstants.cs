@@ -150,8 +150,8 @@
             string.Empty,
             "fim de arquivo", // fim de programa
             "identificador",
-            "constante inteira", // constanteInteira
-            "constante real", //constanteReal
+            "constante int", // constanteInteira
+            "constante float", //constanteReal
             "constante string", //constanteString
             "constante caractere", //constanteCaractere
             "and",

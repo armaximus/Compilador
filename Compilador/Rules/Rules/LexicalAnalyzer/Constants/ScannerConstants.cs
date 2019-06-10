@@ -1513,7 +1513,7 @@
             string.Empty,
             "erro identificando \"!=\"",
             "constante string inválida", // "Erro identificando constanteString"
-            "comentário inválido", // "Erro identificando <ignorar>"
+            "comentário de bloco inválido ou não finalizado", // "Erro identificando <ignorar>"
             string.Empty,
             string.Empty,
             string.Empty,
@@ -1535,23 +1535,23 @@
             string.Empty,
             string.Empty,
             string.Empty,
-            "comentário inválido", // "Erro identificando <ignorar>"
+            "comentário de bloco inválido ou não finalizado", // "Erro identificando <ignorar>"
             string.Empty,
             string.Empty,
             string.Empty,
-            "constante real inválida", // "Erro identificando constanteReal"
+            "constante float inválida", // "Erro identificando constanteReal"
             string.Empty,
             string.Empty,
             string.Empty,
             string.Empty,
             string.Empty,
             string.Empty,
-            "comentário inválido", // "Erro identificando <ignorar>"
+            "comentário de bloco inválido ou não finalizado", // "Erro identificando <ignorar>"
             string.Empty,
-            "comentário inválido", // "Erro identificando <ignorar>"
-            "comentário inválido", // "Erro identificando <ignorar>"
-            "constante real inválida", // "Erro identificando constanteReal"
-            "comentário inválido", // "Erro identificando <ignorar>"
+            "comentário de bloco inválido ou não finalizado", // "Erro identificando <ignorar>"
+            "comentário de bloco inválido ou não finalizado", // "Erro identificando <ignorar>"
+            "constante float inválida", // "Erro identificando constanteReal"
+            "comentário de bloco inválido ou não finalizado", // "Erro identificando <ignorar>"
             string.Empty
         };
     }
