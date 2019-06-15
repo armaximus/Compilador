@@ -79,7 +79,7 @@ namespace Rules.LexicalAnalyzer
             }
             else // IsSemanticAction(x)
             {
-                SemanticAnalyser.executeAction(x - FIRST_SEMANTIC_ACTION, PreviousToken);
+                SemanticAnalyser.ExecuteAction(x - FIRST_SEMANTIC_ACTION, PreviousToken);
                 return false;
             }
         }

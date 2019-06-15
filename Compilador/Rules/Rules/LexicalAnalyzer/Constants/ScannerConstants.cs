@@ -1353,7 +1353,7 @@
             {255, 37}
         };
 
-        public readonly int[] TOKEN_STATE = 
+        public readonly int[] TOKEN_STATE =
         {
             -2,
             0,
@@ -1455,7 +1455,7 @@
             22
         };
 
-        public static readonly string[] SPECIAL_CASES_KEYS = 
+        public static readonly string[] SPECIAL_CASES_KEYS =
         {
             "and",
             "begin",
