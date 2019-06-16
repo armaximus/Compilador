@@ -1,4 +1,4 @@
-﻿namespace Rules.LexicalAnalyzer.Exceptions
+﻿namespace Rules.Analyzer.Exceptions
 {
     public class LexicalException : AnalysisException
     {

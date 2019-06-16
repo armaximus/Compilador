@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rules.LexicalAnalyzer.Exceptions
+namespace Rules.Analyzer.Exceptions
 {
     public class SemanticException : AnalysisException
     {

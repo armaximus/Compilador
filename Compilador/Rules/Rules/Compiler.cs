@@ -1,5 +1,5 @@
-﻿using Rules.LexicalAnalyzer;
-using Rules.LexicalAnalyzer.Exceptions;
+﻿using Rules.Analyzer;
+using Rules.Analyzer.Exceptions;
 using System;
 using System.Text;
 
@@ -35,6 +35,10 @@ namespace Rules
             catch (SyntaticException ex)
             {
                 return string.Format("Erro na linha {0}: encontrado {1} esperado {2}", GetLine(programa, ex.Position), sintatico.CurrentToken.Lexeme, ex.Message);
+            }
+            catch (SemanticException ex)
+            {
+                return string.Format("Erro na linha {0}: {1}", GetLine(programa, ex.Position), ex.Message);
             }
             catch (Exception ex)
             {

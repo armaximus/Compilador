@@ -41,20 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzer\Semantico.constants.cs">
+      <DependentUpon>Semantico.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compiler.cs" />
     <Compile Include="FileManager.cs" />
-    <Compile Include="LexicalAnalyzer\Constants\Constants.cs" />
-    <Compile Include="LexicalAnalyzer\Lexico.cs" />
-    <Compile Include="LexicalAnalyzer\Constants\ParserConstants.cs" />
-    <Compile Include="LexicalAnalyzer\Constants\Translator.cs" />
-    <Compile Include="LexicalAnalyzer\Exceptions\AnalysisException.cs" />
-    <Compile Include="LexicalAnalyzer\Exceptions\LexicalException.cs" />
-    <Compile Include="LexicalAnalyzer\Exceptions\SemanticException.cs" />
-    <Compile Include="LexicalAnalyzer\Exceptions\SyntaticException.cs" />
-    <Compile Include="LexicalAnalyzer\Constants\ScannerConstants.cs" />
-    <Compile Include="LexicalAnalyzer\Semantico.cs" />
-    <Compile Include="LexicalAnalyzer\Sintatico.cs" />
-    <Compile Include="LexicalAnalyzer\Token.cs" />
+    <Compile Include="Analyzer\Constants\Constants.cs" />
+    <Compile Include="Analyzer\Lexico.cs" />
+    <Compile Include="Analyzer\Constants\ParserConstants.cs" />
+    <Compile Include="Analyzer\Constants\Translator.cs" />
+    <Compile Include="Analyzer\Exceptions\AnalysisException.cs" />
+    <Compile Include="Analyzer\Exceptions\LexicalException.cs" />
+    <Compile Include="Analyzer\Exceptions\SemanticException.cs" />
+    <Compile Include="Analyzer\Exceptions\SyntaticException.cs" />
+    <Compile Include="Analyzer\Constants\ScannerConstants.cs" />
+    <Compile Include="Analyzer\Semantico.cs" />
+    <Compile Include="Analyzer\Sintatico.cs" />
+    <Compile Include="Analyzer\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

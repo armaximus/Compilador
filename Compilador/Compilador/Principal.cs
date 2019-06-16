@@ -1,15 +1,7 @@
 ﻿using Rules;
 using ScintillaNET;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
 using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Main
@@ -49,35 +41,27 @@ namespace Main
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F1)
-            {
                 ShowTeam();
-            }
             else if (e.KeyCode == Keys.F9)
-            {
                 Compile();
-            }
             else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.N)
-            {
                 NewFile();
-            }
             else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.O)
-            {
                 OpenFile();
-            }
             else if (e.Modifiers == Keys.Control && e.KeyCode == Keys.S)
-            {
                 SaveFile();
-            }
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
             NewFile();
         }
+
         private void btnAbrir_Click(object sender, EventArgs e)
         {
             OpenFile();
         }
+
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             SaveFile();
@@ -97,10 +81,12 @@ namespace Main
         {
             editor.Cut();
         }
+
         private void btnCompilar_Click(object sender, EventArgs e)
         {
             Compile();
         }
+
         private void btnEquipe_Click(object sender, EventArgs e)
         {
             ShowTeam();
@@ -139,7 +125,7 @@ namespace Main
                 MessageBox.Show("Arquivo salvo com sucesso!");
                 barraStatus.Text = fileManager.filePath;
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 MessageBox.Show("O arquivo não foi salvo, nenhum local selecionado.", "Aviso");
             }
@@ -151,7 +137,7 @@ namespace Main
 
         private void ShowTeam()
         {
-            MessageBox.Show("Alan Felipe Jantz, Caroline Belli Regalin e Matheus Manhke", "Equipe");
+            mensagens.Text = "Alan Felipe Jantz, Caroline Belli Regalin e Matheus Manhke";
         }
 
         private void Compile()

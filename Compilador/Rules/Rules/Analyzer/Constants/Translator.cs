@@ -1,8 +1,8 @@
-﻿using Rules.LexicalAnalyzer.Exceptions;
+﻿using Rules.Analyzer.Exceptions;
 using System;
 using System.Linq;
 
-namespace Rules.LexicalAnalyzer.Constants
+namespace Rules.Analyzer.Constants
 {
     public static class Translator
     {

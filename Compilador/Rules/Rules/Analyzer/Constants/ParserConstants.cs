@@ -1,4 +1,4 @@
-﻿namespace Rules.LexicalAnalyzer.Constants
+﻿namespace Rules.Analyzer.Constants
 {
     public class ParserConstants
     {

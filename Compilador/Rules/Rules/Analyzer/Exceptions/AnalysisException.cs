@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rules.LexicalAnalyzer.Exceptions
+namespace Rules.Analyzer.Exceptions
 {
     public class AnalysisException : Exception
     {

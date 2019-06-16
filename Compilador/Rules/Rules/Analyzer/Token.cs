@@ -1,6 +1,6 @@
-﻿using Rules.LexicalAnalyzer.Constants;
+﻿using Rules.Analyzer.Constants;
 
-namespace Rules.LexicalAnalyzer
+namespace Rules.Analyzer
 {
     public class Token
     {

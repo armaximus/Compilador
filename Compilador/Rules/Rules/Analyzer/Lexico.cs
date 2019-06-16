@@ -1,8 +1,8 @@
-﻿using Rules.LexicalAnalyzer.Exceptions;
-using Rules.LexicalAnalyzer.Constants;
+﻿using Rules.Analyzer.Exceptions;
+using Rules.Analyzer.Constants;
 using System;
 
-namespace Rules.LexicalAnalyzer
+namespace Rules.Analyzer
 {
     public class Lexico : Constants.Constants
     {

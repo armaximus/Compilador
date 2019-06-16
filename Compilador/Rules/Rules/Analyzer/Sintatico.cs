@@ -1,15 +1,15 @@
-﻿using Rules.LexicalAnalyzer;
-using Rules.LexicalAnalyzer.Constants;
-using Rules.LexicalAnalyzer.Exceptions;
+﻿using Rules.Analyzer;
+using Rules.Analyzer.Constants;
+using Rules.Analyzer.Exceptions;
 using System;
 using System.Collections;
 
-namespace Rules.LexicalAnalyzer
+namespace Rules.Analyzer
 {
     public class Sintatico : Constants.Constants
     {
         public Token CurrentToken { get; private set; }
-        private Stack Stack { get; set; }
+        public Stack Stack { get; set; }
         private Token PreviousToken { get; set; }
         private Lexico Scanner { get; set; }
         private Semantico SemanticAnalyser { get; set; }
@@ -77,11 +77,13 @@ namespace Rules.LexicalAnalyzer
                 else
                     throw new SyntaticException(PARSER_ERROR[x], CurrentToken.Position);
             }
-            else // IsSemanticAction(x)
+            else if (IsSemanticAction(x))
             {
                 SemanticAnalyser.ExecuteAction(x - FIRST_SEMANTIC_ACTION, PreviousToken);
                 return false;
             }
+
+            return false;
         }
 
         private bool PushProduction(int topStack, int tokenInput)
