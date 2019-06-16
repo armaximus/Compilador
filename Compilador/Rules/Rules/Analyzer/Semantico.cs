@@ -10,13 +10,15 @@ namespace Rules.Analyzer
     public partial class Semantico : Constants.Constants
     {
         public Stack<string> Pilha { get; set; }
-        public static List<string> Codigo { get; set; }
+        public List<string> Codigo { get; set; }
         public string OperadorRelacional { get; set; }
+        private List<string> Idents { get; set; }
 
         public Semantico()
         {
             Pilha = new Stack<string>();
             Codigo = new List<string>();
+            Idents = new List<string>();
         }
 
         public void ExecuteAction(int action, Token token)
@@ -87,38 +89,38 @@ namespace Rules.Analyzer
         private void ExecuteAdd()
         {
             PrepareStackForArithmeticOperation();
-            Codigo.Add(add);
+            AddCode(add);
         }
 
         private void ExecuteSub()
         {
             PrepareStackForArithmeticOperation();
-            Codigo.Add(sub);
+            AddCode(sub);
         }
 
         private void ExecuteMul()
         {
             PrepareStackForArithmeticOperation();
-            Codigo.Add(mul);
+            AddCode(mul);
         }
 
         private void ExecuteDiv()
         {
             PrepareStackForArithmeticOperation();
-            Codigo.Add(div);
+            AddCode(div);
         }
 
         private void ExecuteInt(Token token)
         {
             Pilha.Push(int64);
-            Codigo.Add(ldci8 + " " + token.Lexeme);
-            Codigo.Add(convr8);
+            AddCode(ldci8 + " " + token.Lexeme);
+            AddCode(convr8);
         }
 
         private void ExecuteFloat(Token token)
         {
             Pilha.Push(float64);
-            Codigo.Add(ldci8 + " " + token.Lexeme);
+            AddCode(ldci8 + " " + token.Lexeme);
         }
 
         private void ExecutePlus()
@@ -140,9 +142,9 @@ namespace Rules.Analyzer
             else
                 throw new SemanticException("Tipos incompatíveis em expressão aritmética.");
 
-            Codigo.Add(ldci8 + " -1");
-            Codigo.Add(convr8);
-            Codigo.Add(mul);
+            AddCode(ldci8 + " -1");
+            AddCode(convr8);
+            AddCode(mul);
         }
 
         private void ExecuteTipo()
@@ -150,49 +152,48 @@ namespace Rules.Analyzer
             var tipo = Pilha.Pop();
 
             if (tipo == int64)
-                Codigo.Add(convr8);
+                AddCode(convi8);
 
-            Codigo.Add(string.Format("call void [mscorlib]System.Console::Write({0})", tipo));
+            AddCode(string.Format("call void [mscorlib]System.Console::Write({0})", tipo));
         }
 
         private void ExecuteMain()
         {
-            Codigo.Add(@"
-                         .assembly extern mscorlib {}
-                         .assembly _codigo_objeto {}
-                         .module   _codigo_object.exe
-                         
-                         .class public _UNICA {
-                        ");
+            Codigo.Add(".assembly extern mscorlib {}");
+            Codigo.Add(".assembly _codigo_objeto {}");
+            Codigo.Add(".module   _codigo_object.exe");
+            Codigo.Add(string.Empty);
+            Codigo.Add(".class public _UNICA {");
+            Codigo.Add(string.Empty);
         }
 
         private void ExecuteBegin()
         {
-            Codigo.Add(@"
-                        .method static public void _principal() {
-                            .entrypoint
-                        ");
+            Codigo.Add(".method static public void _principal() {");
+            Codigo.Add("    .entrypoint");
+            Codigo.Add(string.Empty);
+            Idents.Add(Ident);
         }
 
         private void ExecuteEnd()
         {
-            Codigo.Add(@"
-                            ret
-                            }
-                        }
-                        ");
+            Codigo.Add(string.Empty);
+            AddCode("ret");
+            AddCode("}");
+            Idents.RemoveAt(Idents.Count - 1);
+            AddCode("}");
         }
 
         private void ExecuteTrue()
         {
             Pilha.Push(Bool);
-            Codigo.Add(True);
+            AddCode(True);
         }
 
         private void ExecuteFalse()
         {
             Pilha.Push(Bool);
-            Codigo.Add(False);
+            AddCode(False);
         }
 
         private void ExecuteNot()
@@ -204,8 +205,14 @@ namespace Rules.Analyzer
             else
                 throw new SemanticException("Tipo não lógico.");
 
-            Codigo.Add(True);
-            Codigo.Add(xor);
+            AddCode(True);
+            AddCode(xor);
+        }
+
+        private void AddCode(string code)
+        {
+            string ident = string.Join(string.Empty, Idents);
+            Codigo.Add(ident + code);
         }
     }
 }

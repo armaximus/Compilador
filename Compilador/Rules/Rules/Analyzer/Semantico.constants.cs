@@ -2,12 +2,16 @@
 {
     public partial class Semantico
     {
+        private const string Ident = "    ";
+
         public const string float64 = "float64";
         public const string int64 = "int64";
         public const string Bool = "bool";
         public const string True = "ldc.i4.1";
         public const string False = "ldc.i4.0";
         public const string convr8 = "conv.r8";
+        public const string convi8 = "conv.i8";
+        
         public const string ldci8 = "ldc.i8";
         public const string xor = "xor";
         public const string add = "add";
