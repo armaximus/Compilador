@@ -1354,7 +1354,8 @@
         };
 
         public readonly int[] TOKEN_STATE =
-        { -2,
+        {
+          -2,
            0,
           -1,
           -1,
@@ -1397,10 +1398,12 @@
            -2,
            -1,
            -2,
-           0 };
+           0
+        };
 
         public readonly int[] SPECIAL_CASES_INDEXES =
-        {    0,
+        {
+             0,
              0,
              0,
              22,
@@ -1453,7 +1456,8 @@
         };
 
         public static readonly string[] SPECIAL_CASES_KEYS =
-       {  "and",
+       {
+          "and",
           "begin",
           "bool",
           "char",
@@ -1478,7 +1482,8 @@
         };
 
         public readonly int[] SPECIAL_CASES_VALUES =
-         {  7,
+         {
+            7,
             8,
             9,
             10,
@@ -1499,7 +1504,8 @@
             25,
             26,
             27,
-            28 };
+            28
+        };
 
         public readonly string[] SCANNER_ERROR =
         {
