@@ -14,10 +14,5 @@ namespace Rules.Analyzer
             this.Lexeme = lexeme;
             this.Position = position;
         }
-
-        public override string ToString()
-        {
-            return string.Format("{0} {1}", Translator.GetToken(this), Lexeme);
-        }
     }
 }

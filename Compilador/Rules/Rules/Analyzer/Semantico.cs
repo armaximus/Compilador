@@ -49,6 +49,12 @@ namespace Rules.Analyzer
                 case MINUS:
                     ExecuteMinus();
                     break;
+                case OPERATOR:
+                    OperadorRelacional = token.Lexeme;
+                    break;
+                case RELACIONALOPERATION:
+                    ExecuteRelacionalOperation();
+                    break;
                 case TRUE:
                     ExecuteTrue();
                     break;
@@ -80,10 +86,18 @@ namespace Rules.Analyzer
             var tipo1 = Pilha.Pop();
             var tipo2 = Pilha.Pop();
 
+            if (!ValidTypeForArithmeticOperation(tipo1) || !ValidTypeForArithmeticOperation(tipo2))
+                throw new SemanticException("Tipo(s) incompatível(is) em expressão aritmética.");
+
             if (tipo1 == float64 || tipo2 == float64)
                 Pilha.Push(float64);
             else
                 Pilha.Push(int64);
+        }
+
+        private bool ValidTypeForArithmeticOperation(string type)
+        {
+            return type == int64 || type == float64;
         }
 
         private void ExecuteAdd()
@@ -203,10 +217,36 @@ namespace Rules.Analyzer
             if (tipo == Bool)
                 Pilha.Push(Bool);
             else
-                throw new SemanticException("Tipo não lógico.");
+                throw new SemanticException("Tipo(s) incompatível(is) em expressão lógica.");
 
             AddCode(True);
             AddCode(xor);
+        }
+
+        private void ExecuteRelacionalOperation()
+        {
+            var tipo1 = Pilha.Pop();
+            var tipo2 = Pilha.Pop();
+
+            if (tipo1 == tipo2)
+                Pilha.Push(Bool);
+            else
+                throw new SemanticException("Tipos incompatíveis em expressão relacional.");
+
+            switch (OperadorRelacional)
+            {
+                case ">":
+                    AddCode(cgt);
+                    break;
+                case "<":
+                    AddCode(clt);
+                    break;
+                case "=":
+                    AddCode(ceq);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void AddCode(string code)

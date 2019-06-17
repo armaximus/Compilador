@@ -11,7 +11,10 @@
         public const string False = "ldc.i4.0";
         public const string convr8 = "conv.r8";
         public const string convi8 = "conv.i8";
-        
+        public const string cgt = "cgt";
+        public const string clt = "clt";
+        public const string ceq = "ceq";
+
         public const string ldci8 = "ldc.i8";
         public const string xor = "xor";
         public const string add = "add";
@@ -27,6 +30,8 @@
         public const int FLOAT = 6;
         public const int PLUS = 7;
         public const int MINUS = 8;
+        public const int OPERATOR = 9;
+        public const int RELACIONALOPERATION = 10;
         public const int TRUE = 11;
         public const int FALSE = 12;
         public const int NOT = 13;
