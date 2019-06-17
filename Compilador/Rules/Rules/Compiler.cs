@@ -42,7 +42,7 @@ namespace Rules
             }
             catch (Exception ex)
             {
-                return string.Format("Erro desconhecido: {0}", ex.Message);
+                return string.Format("Erro desconhecido: {0} {1}{1}{2}", ex.Message, Environment.NewLine, ex.StackTrace);
             }
         }
 

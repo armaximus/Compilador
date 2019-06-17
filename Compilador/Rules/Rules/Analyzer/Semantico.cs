@@ -241,7 +241,7 @@ namespace Rules.Analyzer
                 case "<":
                     AddCode(clt);
                     break;
-                case "=":
+                case "==":
                     AddCode(ceq);
                     break;
                 default:

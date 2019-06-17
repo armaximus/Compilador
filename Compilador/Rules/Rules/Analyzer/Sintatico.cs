@@ -45,7 +45,7 @@ namespace Rules.Analyzer
                 CurrentToken = new Token(DOLLAR, "fim de arquivo", pos);
             }
 
-            int x = ((int)Stack.Pop());
+            int x = (int)Stack.Pop();
             int a = CurrentToken.Id;
 
             if (x == EPSILON)
