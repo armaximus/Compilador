@@ -49,7 +49,6 @@
     <Compile Include="Analyzer\Constants\Constants.cs" />
     <Compile Include="Analyzer\Lexico.cs" />
     <Compile Include="Analyzer\Constants\ParserConstants.cs" />
-    <Compile Include="Analyzer\Constants\Translator.cs" />
     <Compile Include="Analyzer\Exceptions\AnalysisException.cs" />
     <Compile Include="Analyzer\Exceptions\LexicalException.cs" />
     <Compile Include="Analyzer\Exceptions\SemanticException.cs" />

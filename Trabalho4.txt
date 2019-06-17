@@ -154,29 +154,29 @@ write = identificador : "write"
 <parametrosFormais1> ::= î | ";" <parametrosFormais> ;
 <parametro> ::=  <tipo> ":" <listaIdentificadores> ;
 <tipo> ::= int | float | bool | char | string ;
-<listaIdentificadores> ::= identificador <listaIdentificadores1> ;
-<listaIdentificadores1> ::= î | "," <listaIdentificadores> ;
+<listaIdentificadores> ::= identificador #32 <listaIdentificadores1> ;
+<listaIdentificadores1> ::= î | "," <listaIdentificadores> ; 
 
 <modulo> ::= module identificador begin <corpo> end ;
 
 <corpo> ::= <declaracaoVariaveis> <listaComandos> ;
 <declaracaoVariaveis> ::= î | <variavel> <declaracaoVariaveis> ;
-<variavel> ::= <tipo> ":" <listaIdentificadores>"." ;
+<variavel> ::= <tipo> #30 ":" <listaIdentificadores> #31"." ; 
 <listaComandos> ::= <comando>"." <listaComandos1> ;
 <listaComandos1> ::= î | <listaComandos> ;
-<comando> ::= <atribuicao> | <entradaDados> | <saidaDados> | <retornoModulo> |    "(" <expressao> ")" <comando1> ;            
-<comando1> ::=  ifTrueDo <listaComandos> <selecaoOpcional> end |    // selecao
-	       <tipoCondicao> <listaComandos> end ;    // repeticao
+<comando> ::= <atribuicao> | <entradaDados> | <saidaDados> | <retornoModulo> | #37 "(" <expressao> ")" <comando1> ;            
+<comando1> ::=  ifTrueDo #38 <listaComandos> <selecaoOpcional> end #39 |    // selecao
+	       <tipoCondicao> #41 <listaComandos> end #42 ;    // repeticao
 
-<atribuicao> ::= identificador <operadorAtribuicao> <expressao> ;
+<atribuicao> ::= identificador #32 <operadorAtribuicao> #36 <expressao> #34 ;
 <operadorAtribuicao> ::= "=" | "+=" | "-=" ;
 
-<entradaDados> ::= read "(" <listaIdentificadores> ")" ;
+<entradaDados> ::= read "(" <listaIdentificadores> #35 ")" ;
 
 <saidaDados> ::= write "(" <listaExpressoes> ")" ;
 <listaExpressoes> ::= <expressao> #14 <listaExpressoes1> ;
 <listaExpressoes1> ::= î | "," <listaExpressoes> ;
-<selecaoOpcional> ::= î | ifFalseDo <listaComandos> ;
+<selecaoOpcional> ::= î | #40 ifFalseDo <listaComandos> ;
 
 <tipoCondicao> ::= whileTrueDo | whileFalseDo ;
 
@@ -192,7 +192,7 @@ write = identificador : "write"
 <aritmetica1> ::= "+" <termo> #1 <aritmetica1> | "-" <termo> #2 <aritmetica1> | î;
 <termo> ::= <fator> <termo1>;
 <termo1> ::= "*" <fator> #3 <termo1> | "/"<fator> #4 <termo1> | î; 
-<fator> ::= identificador <fator1> | 
+<fator> ::= identificador #33 <fator1> | 
              constanteInteira #5|
              constanteReal #6 |
              constanteCaractere #20 |
