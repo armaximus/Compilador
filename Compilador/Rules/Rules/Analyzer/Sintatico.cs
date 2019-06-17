@@ -79,7 +79,14 @@ namespace Rules.Analyzer
             }
             else if (IsSemanticAction(x))
             {
-                SemanticAnalyser.ExecuteAction(x - FIRST_SEMANTIC_ACTION, PreviousToken);
+                try
+                {
+                    SemanticAnalyser.ExecuteAction(x - FIRST_SEMANTIC_ACTION, PreviousToken);
+                }
+                catch (Exception ex)
+                {
+                    throw new SemanticException(ex.Message, CurrentToken.Position);
+                }
                 return false;
             }
 

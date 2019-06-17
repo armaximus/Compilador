@@ -77,7 +77,7 @@ namespace Rules.Analyzer
                     ExecuteEnd();
                     break;
                 default:
-                    break;
+                    throw new SemanticException(string.Format( "Ação #{0} não implementada.", action));
             }
         }
 
