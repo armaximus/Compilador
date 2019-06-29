@@ -1,7 +1,9 @@
 ﻿using Rules;
 using ScintillaNET;
 using System;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Main
@@ -27,14 +29,9 @@ namespace Main
 
         private void editor_TextChanged(object sender, EventArgs e)
         {
-            // Did the number of characters in the line number display change?
-            // i.e. nnn VS nn, or nnnn VS nn, etc...
             var _maxLineNumberCharLength = this.editor.Lines.Count.ToString().Length;
             if (_maxLineNumberCharLength == this.maxLineNumberCharLength)
                 return;
-
-            // Calculate the width required to display the last line number
-            // and include some padding for good measure.
             const int padding = 2;
             editor.Margins[0].Width = editor.TextWidth(Style.LineNumber, new string('9', _maxLineNumberCharLength + 1)) + padding;
             this.maxLineNumberCharLength = _maxLineNumberCharLength;
@@ -108,13 +105,13 @@ namespace Main
 
                 if (FileManager.OpenFile())
                 {
-                    editor.Text = FileManager.fileContent;
-                    barraStatus.Text = FileManager.filePath;
+                    editor.Text = FileManager.FileContent;
+                    barraStatus.Text = FileManager.FilePath;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format("Não foi possível abrir o arquivo. Erro: {0}", ex.Message), "Erro");
+                MessageBox.Show(string.Format("Não foi possível abrir o arquivo.{0}Erro: {1}", Environment.NewLine, ex.Message), "Erro");
             }
         }
 
@@ -125,7 +122,7 @@ namespace Main
                 FileManager.SaveFile(editor.Text);
                 mensagens.Text = string.Empty;
                 MessageBox.Show("Arquivo salvo com sucesso!");
-                barraStatus.Text = FileManager.filePath;
+                barraStatus.Text = FileManager.FilePath;
             }
             catch (ArgumentException)
             {
@@ -147,7 +144,10 @@ namespace Main
             try
             {
                 if (Compiler.Compile(editor.Text))
+                {
+                    FileManager.Create(Compiler.Assembly);
                     mensagens.Text = "Programa compilado com sucesso.";
+                }
                 else
                     mensagens.Text = "Nenhum programa para compilar.";
             }

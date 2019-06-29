@@ -1,8 +1,8 @@
 main begin
-    int: lado, area.
+	int: lado, area.
 
-    write ("digite um valor para lado: ").
-    read (lado).
-    area = lado  lado.
-    write (area).
+	write ("digite um valor para lado: ").
+	read (lado).
+	area = lado * lado.
+	write (area).
 end

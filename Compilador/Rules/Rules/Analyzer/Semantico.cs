@@ -110,7 +110,8 @@ namespace Rules.Analyzer
                     ExecuteRead();
                     break;
                 case ASSIGNMENTOPERATOR:
-                    throw new SemanticException("Ação ASSIGNMENTOPERATOR (#36) não implementada.");
+                    ExecuteAssignment(token);
+                    break;
                 case COMAND:
                     throw new SemanticException("Ação COMAND (#37) não implementada.");
                 case IFTRUE:
@@ -126,6 +127,11 @@ namespace Rules.Analyzer
                 default:
                     throw new SemanticException(string.Format("Ação #{0} não implementada.", action));
             }
+        }
+
+        private void ExecuteAssignment(Token token)
+        {
+            // batata
         }
 
         private void PrepareStackForArithmeticOperation()
@@ -298,8 +304,6 @@ namespace Rules.Analyzer
 
         private void ExecuteString(Token token)
         {
-            AddCode();
-
             string lexeme = token.Lexeme;
 
             if (lexeme == "\\s")

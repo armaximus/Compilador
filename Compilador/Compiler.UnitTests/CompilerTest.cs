@@ -26,18 +26,14 @@ namespace Compiler.UnitTests
                               "    conv.r8" + Environment.NewLine +
                               "    conv.i8" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(int64)" + Environment.NewLine +
-                              "" + Environment.NewLine +
                               "    ldstr \" \"" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
                               "    ldc.i8 2.5" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(float64)" + Environment.NewLine +
-                              "" + Environment.NewLine +
                               "    ldstr \"\\t\"" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
-                              "" + Environment.NewLine +
                               "    ldstr \"teste\"" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
-                              "" + Environment.NewLine +
                               "    ldstr \"\\n\"" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
                               "" + Environment.NewLine +

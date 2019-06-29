@@ -8,80 +8,106 @@ namespace Rules
 {
     public class FileManager
     {
-        private OpenFileDialog openFileDialog;
-        public string filePath { get;set;}
-        public string fileContent
+        private OpenFileDialog OpenFileDialog { get; set; }
+        public string FilePath { get; set; }
+
+        public string FileContent
         {
             get
-            {  
+            {
                 if (!FileOpenExists())
-                {
                     throw new FileNotFoundException("Nenhum arquivo aberto");
-                }
-                StreamReader streamReader = new StreamReader(filePath);
+
+                StreamReader streamReader = new StreamReader(FilePath);
                 string text = streamReader.ReadToEnd();
                 streamReader.Close();
                 return text;
             }
         }
-     
+
         public bool OpenFile()
         {
-            openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Text|*.txt";
+            return OpenFile("Text|*.txt");
+        }
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+        public bool OpenFile(string filter)
+        {
+            OpenFileDialog = new OpenFileDialog();
+            OpenFileDialog.Filter = filter;
+
+            if (OpenFileDialog.ShowDialog() == DialogResult.OK)
             {
-                filePath = openFileDialog.FileName;
+                FilePath = OpenFileDialog.FileName;
                 return true;
             }
 
             return false;
         }
-        
-        public void SaveFile(String fileText)
+
+        public void SaveFile(string fileText)
         {
             if (FileOpenExists())
             {
-                WriteFile(filePath, fileText);
+                WriteFile(FilePath, fileText);
             }
             else
             {
                 string path = SelectPathToSave();
                 CreateFile(path);
                 WriteFile(path, fileText);
-                filePath = path;
+                FilePath = path;
             }
         }
 
         private bool FileOpenExists()
         {
-            return File.Exists(filePath);
+            return File.Exists(FilePath);
         }
 
         private void WriteFile(string path, string fileText)
         {
-            StreamWriter writer = new StreamWriter(path);
-            writer.Write(fileText);
-            writer.Close();
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                writer.Write(fileText);
+                writer.Close();
+            }
         }
-        
+
         private string SelectPathToSave()
         {
+            return SelectPathToSave("Text|*.txt");
+        }
+
+        private string SelectPathToSave(string filter)
+        {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Text|*.txt";
+            saveFileDialog.Filter = filter;
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
                 return saveFileDialog.FileName;
-            }
 
-            return "";
+            return string.Empty;
         }
 
         private void CreateFile(string path)
         {
             File.Create(path).Close();
+        }
+
+        public void Create(string content)
+        {
+            string fileName = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(FilePath))
+                fileName = Path.Combine(Directory.GetCurrentDirectory(), DateTime.Now.ToString("yyyyMMMddHHmmss").ToUpper() + ".il");
+            else
+                fileName = FilePath.Substring(0, FilePath.Length - 4) + ".il";
+
+            if (File.Exists(fileName))
+                File.Delete(fileName);
+
+            CreateFile(fileName);
+            WriteFile(fileName, content);
         }
     }
 }
