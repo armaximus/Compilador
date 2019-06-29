@@ -1,4 +1,6 @@
-﻿namespace Rules.Analyzer.Constants
+﻿using Rules.Analyzer.Parsers;
+
+namespace Rules.Analyzer.Constants
 {
     public abstract class ScannerConstants : ParserConstants
     {

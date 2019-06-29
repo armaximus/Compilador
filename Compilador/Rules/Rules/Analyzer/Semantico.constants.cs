@@ -18,6 +18,7 @@
         public const string ceq = "ceq";
 
         public const string ldci8 = "ldc.i8";
+        public const string ldstr = "ldstr";
         public const string xor = "xor";
         public const string add = "add";
         public const string sub = "sub";

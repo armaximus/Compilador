@@ -1,4 +1,5 @@
 ﻿using Rules.Analyzer;
+using Rules.Analyzer.Constants;
 using Rules.Analyzer.Exceptions;
 using System;
 using System.Text;
@@ -7,14 +8,16 @@ namespace Rules
 {
     public class Compiler
     {
-        public string Compile(string programa)
+        public string Assembly { get; private set; }
+
+        public bool Compile(string programa)
         {
             Sintatico sintatico = new Sintatico();
 
             programa = programa.Trim();
 
             if (string.IsNullOrWhiteSpace(programa))
-                return "Nenhum programa para compilar.";
+                return false;
 
             try
             {
@@ -25,24 +28,25 @@ namespace Rules
 
                 ProcessarPrograma(lexico);
 
-                return "Programa compilado com sucesso.";
+                Assembly = string.Join(Environment.NewLine, semantico.Codigo);
 
+                return true;
             }
             catch (LexicalException ex)
             {
-                return string.Format("Erro na linha {0}: {1}", GetLine(programa, ex.Position), ex.Message);
+                throw new LexicalException(string.Format("Erro na linha {0}: {1}", GetLine(programa, ex.Position), ex.Message));
             }
             catch (SyntaticException ex)
             {
-                return string.Format("Erro na linha {0}: encontrado {1} esperado {2}", GetLine(programa, ex.Position), sintatico.CurrentToken.Lexeme, ex.Message);
+                throw new SyntaticException(string.Format("Erro na linha {0}: encontrado {1} esperado {2}", GetLine(programa, ex.Position), sintatico.CurrentToken.Lexeme, ex.Message));
             }
             catch (SemanticException ex)
             {
-                return string.Format("Erro na linha {0}: {1}", GetLine(programa, ex.Position), ex.Message);
+                throw new SemanticException(string.Format("Erro na linha {0}: {1}", GetLine(programa, ex.Position), ex.Message));
             }
             catch (Exception ex)
             {
-                return string.Format("Erro desconhecido: {0} {1}{1}{2}", ex.Message, Environment.NewLine, ex.StackTrace);
+                throw new Exception(string.Format("Erro desconhecido: {0} {1}{1}{2}", ex.Message, Environment.NewLine, ex.StackTrace));
             }
         }
 

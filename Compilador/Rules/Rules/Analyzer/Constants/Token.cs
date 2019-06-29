@@ -1,6 +1,4 @@
-﻿using Rules.Analyzer.Constants;
-
-namespace Rules.Analyzer
+﻿namespace Rules.Analyzer.Constants
 {
     public class Token
     {

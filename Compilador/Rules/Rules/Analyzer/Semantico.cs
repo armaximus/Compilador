@@ -76,9 +76,33 @@ namespace Rules.Analyzer
                 case END:
                     ExecuteEnd();
                     break;
+                case AND:
+                    throw new SemanticException("Ação AND (#18) não implementada.");
+                case OR:
+                    throw new SemanticException("Ação OR (#19) não implementada.");
+                case CHAR:
+                case STRING:
+                    ExecuteString(token);
+                    break;
                 default:
-                    throw new SemanticException(string.Format( "Ação #{0} não implementada.", action));
+                    throw new SemanticException(string.Format("Ação #{0} não implementada.", action));
             }
+        }
+
+        private void ExecuteString(Token token)
+        {
+            AddCode();
+
+            string lexeme = token.Lexeme;
+
+            if (lexeme == "\\s")
+                lexeme = "\" \"";
+            else if (lexeme == "\\t" || lexeme == "\\n")
+                lexeme = string.Format("\"{0}\"", lexeme);
+
+            AddCode(ldstr + " " + lexeme);
+            AddCode(convr8);
+            Pilha.Push(str);
         }
 
         private void PrepareStackForArithmeticOperation()
@@ -176,22 +200,22 @@ namespace Rules.Analyzer
             Codigo.Add(".assembly extern mscorlib {}");
             Codigo.Add(".assembly _codigo_objeto {}");
             Codigo.Add(".module   _codigo_object.exe");
-            Codigo.Add(string.Empty);
+            AddCode();
             Codigo.Add(".class public _UNICA {");
-            Codigo.Add(string.Empty);
+            AddCode();
         }
 
         private void ExecuteBegin()
         {
             Codigo.Add(".method static public void _principal() {");
             Codigo.Add("    .entrypoint");
-            Codigo.Add(string.Empty);
+            AddCode();
             Idents.Add(Ident);
         }
 
         private void ExecuteEnd()
         {
-            Codigo.Add(string.Empty);
+            AddCode();
             AddCode("ret");
             AddCode("}");
             Idents.RemoveAt(Idents.Count - 1);
@@ -247,6 +271,11 @@ namespace Rules.Analyzer
                 default:
                     break;
             }
+        }
+
+        private void AddCode()
+        {
+            Codigo.Add(string.Empty);
         }
 
         private void AddCode(string code)

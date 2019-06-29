@@ -1,4 +1,4 @@
-﻿namespace Rules.Analyzer.Constants
+﻿namespace Rules.Analyzer.Parsers
 {
     public class ParserConstants
     {

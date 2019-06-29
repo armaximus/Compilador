@@ -8,11 +8,13 @@ namespace Main
 {
     public partial class Principal : Form
     {
-        private Compiler compiler = new Compiler();
-        private FileManager fileManager = new FileManager();
+        private Compiler Compiler { get; set; }
+        private FileManager FileManager { get; set; }
 
         public Principal()
         {
+            Compiler = new Compiler();
+            FileManager = new FileManager();
             InitializeComponent();
             this.editor.Styles[Style.Default].Font = "Consolas";
         }
@@ -37,7 +39,7 @@ namespace Main
             editor.Margins[0].Width = editor.TextWidth(Style.LineNumber, new string('9', _maxLineNumberCharLength + 1)) + padding;
             this.maxLineNumberCharLength = _maxLineNumberCharLength;
         }
-       
+
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F1)
@@ -93,21 +95,21 @@ namespace Main
         }
 
         private void NewFile()
-        { 
+        {
             editor.Text = mensagens.Text = barraStatus.Text = string.Empty;
-            fileManager = new FileManager();
+            FileManager = new FileManager();
         }
 
         private void OpenFile()
         {
             try
             {
-                fileManager = new FileManager();
+                FileManager = new FileManager();
 
-                if (fileManager.OpenFile())
+                if (FileManager.OpenFile())
                 {
-                    editor.Text = fileManager.fileContent;
-                    barraStatus.Text = fileManager.filePath;
+                    editor.Text = FileManager.fileContent;
+                    barraStatus.Text = FileManager.filePath;
                 }
             }
             catch (Exception ex)
@@ -120,10 +122,10 @@ namespace Main
         {
             try
             {
-                fileManager.SaveFile(editor.Text);
+                FileManager.SaveFile(editor.Text);
                 mensagens.Text = string.Empty;
                 MessageBox.Show("Arquivo salvo com sucesso!");
-                barraStatus.Text = fileManager.filePath;
+                barraStatus.Text = FileManager.filePath;
             }
             catch (ArgumentException)
             {
@@ -142,7 +144,17 @@ namespace Main
 
         private void Compile()
         {
-            mensagens.Text = compiler.Compile(editor.Text);
+            try
+            {
+                if (Compiler.Compile(editor.Text))
+                    mensagens.Text = "Programa compilado com sucesso.";
+                else
+                    mensagens.Text = "Nenhum programa para compilar.";
+            }
+            catch (Exception ex)
+            {
+                mensagens.Text = ex.Message;
+            }
         }
     }
 }

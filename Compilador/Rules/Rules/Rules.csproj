@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Analyzer\Parsers\ExpressionParser.cs" />
     <Compile Include="Analyzer\Semantico.constants.cs">
       <DependentUpon>Semantico.cs</DependentUpon>
     </Compile>
@@ -48,7 +49,7 @@
     <Compile Include="FileManager.cs" />
     <Compile Include="Analyzer\Constants\Constants.cs" />
     <Compile Include="Analyzer\Lexico.cs" />
-    <Compile Include="Analyzer\Constants\ParserConstants.cs" />
+    <Compile Include="Analyzer\Parsers\ParserConstants.cs" />
     <Compile Include="Analyzer\Exceptions\AnalysisException.cs" />
     <Compile Include="Analyzer\Exceptions\LexicalException.cs" />
     <Compile Include="Analyzer\Exceptions\SemanticException.cs" />
@@ -56,9 +57,10 @@
     <Compile Include="Analyzer\Constants\ScannerConstants.cs" />
     <Compile Include="Analyzer\Semantico.cs" />
     <Compile Include="Analyzer\Sintatico.cs" />
-    <Compile Include="Analyzer\Token.cs" />
+    <Compile Include="Analyzer\Constants\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
