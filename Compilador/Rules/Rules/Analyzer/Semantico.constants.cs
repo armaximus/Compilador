@@ -55,7 +55,7 @@
         public const int EXPRESSION = 34;
         public const int READ = 35;
         public const int ASSIGNMENTOPERATOR = 36;
-        public const int COMAND = 37;
+        public const int COMMAND = 37;
         public const int IFTRUE = 38;
         public const int ENDSELECTION = 39;
         public const int IFFALSE = 40;

@@ -84,9 +84,11 @@ namespace Rules.Analyzer
                     ExecuteEnd();
                     break;
                 case AND:
-                    throw new SemanticException("Ação AND (#18) não implementada.");
+                    ExecuteAnd();
+                    break;
                 case OR:
-                    throw new SemanticException("Ação OR (#19) não implementada.");
+                    ExecuteOr();
+                    break;
                 case CHAR:
                 case STRING:
                     ExecuteString(token);
@@ -112,26 +114,27 @@ namespace Rules.Analyzer
                 case ASSIGNMENTOPERATOR:
                     ExecuteAssignment(token);
                     break;
-                case COMAND:
-                    throw new SemanticException("Ação COMAND (#37) não implementada.");
+                case COMMAND:
+                    ExecuteCommand();
+                    break;
                 case IFTRUE:
-                    throw new SemanticException("Ação IFTRUE (#38) não implementada.");
+                    ExecuteIf("true");
+                    break;
                 case ENDSELECTION:
-                    throw new SemanticException("Ação ENDSELECTION (#39) não implementada.");
+                    ExecuteEndCycle("selection");
+                    break;
                 case IFFALSE:
-                    throw new SemanticException("Ação IFFALSE (#40) não implementada.");
+                    ExecuteIf("false");
+                    break;
                 case CONDITIONTYPE:
-                    throw new SemanticException("Ação CONDITIONTYPE (#41) não implementada.");
+                    ExecuteConditionType();
+                    break;
                 case ENDREPETITION:
-                    throw new SemanticException("Ação ENDREPETITION (#42) não implementada.");
+                    ExecuteEndCycle("selection");
+                    break;
                 default:
                     throw new SemanticException(string.Format("Ação #{0} não implementada.", action));
             }
-        }
-
-        private void ExecuteAssignment(Token token)
-        {
-            // batata
         }
 
         private void PrepareStackForArithmeticOperation()
@@ -249,6 +252,30 @@ namespace Rules.Analyzer
             AddCode("}");
             Idents.Pop();
             AddCode("}");
+        }
+
+        private void ExecuteAnd()
+        {
+            /*
+             v1 = Desempilha
+             v2 = Desempilha
+
+             Empilha(v1 && v2)
+             */
+
+            PilhaTipos.Push(Bool);
+        }
+
+        private void ExecuteOr()
+        {
+            /*
+             v1 = Desempilha
+             v2 = Desempilha
+
+             Empilha(v1 || v2)
+             */
+
+            PilhaTipos.Push(Bool);
         }
 
         private void ExecuteTrue()
@@ -401,6 +428,59 @@ namespace Rules.Analyzer
                 AddCode(string.Format("call {0} [mscorlib]System.{1}::Parse(string)", tipoIdentificador, classe));
                 AddCode(stloc + " " + "identificador");
             }
+        }
+
+        private void ExecuteAssignment(Token token)
+        {
+            string lexeme = token.Lexeme;
+
+            if (lexeme == "+=" || lexeme == "-=")
+            {
+                // Carregar o valor armazenado no identificador (ldloc)
+            }
+
+            // Gerar codigo para atribuir o resultado da expressão ao identificador (stloc)
+
+            //Para o operador +=, somar (add) o valor armazenado ao resultado da expressão e atribuir o resultado da expressão ao identificador (stloc)
+
+            //Para o operador -=, somar (sub) o valor armazenado ao resultado da expressão e atribuir o resultado da expressão ao identificador (stloc)
+        }
+
+        private void ExecuteCommand()
+        {
+            // WhileTrueDo
+            // Rotular o primeiro comando da expressão
+            // Verificar se o resultado da expressão é false, se sim, desviar para o primeiro comando após o end
+            // Gerar codigo para desviar para o primeiro comando da expressão e rotular o primeiro comando após o end
+
+            // WhileFalseDo
+            // Rotular o primeiro comando da expressão
+            // Verificar se o resultado da expressão é true, se sim, desviar para o primeiro comando após o end
+            // Gerar codigo para desviar para o primeiro comando da expressão e rotular o primeiro comando após o end
+        }
+
+        private void ExecuteIf(string tipo)
+        {
+            // IfTrueDo
+            // Verifica o resultado da expressão
+            // Se for false:
+            // Quando existe ifFlaseDo, desviar para este bloco
+            // Senão, vai para o end (rotular)
+
+            // IfFalseDo
+            // Verifica o resultado da expressão
+            // se for false, desviar para este bloco
+            // Senão, vai para o end (rotular)
+        }
+
+        private void ExecuteEndCycle(string tipo)
+        {
+            //Aparentemente, é para sair do ciclo de seleção ou repetição
+        }
+
+        private void ExecuteConditionType()
+        {
+            //Aparentemente, é para representar o tipo de verificação (whileTrueDo/whileFalseDo)
         }
 
         private void AddCode()
