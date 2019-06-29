@@ -9,16 +9,23 @@ namespace Rules.Analyzer
 {
     public partial class Semantico : Constants.Constants
     {
-        public Stack<string> Pilha { get; set; }
-        public List<string> Codigo { get; set; }
-        public string OperadorRelacional { get; set; }
-        private List<string> Idents { get; set; }
+        public string OperadorRelacional { get; private set; }
+        public List<string> Codigo { get; private set; }
+        public Stack<string> PilhaTipos { get; private set; }
+        public Stack<string> PilhaRotulos { get; private set; }
+        public List<string> ListaIdentificadores { get; private set; }
+        public Dictionary<string, string> TabelaSimbolos { get; private set; }
+        public string TipoVariavel { get; private set; }
+        private Stack<string> Idents { get; set; }
 
         public Semantico()
         {
-            Pilha = new Stack<string>();
             Codigo = new List<string>();
-            Idents = new List<string>();
+            PilhaTipos = new Stack<string>();
+            PilhaRotulos = new Stack<string>();
+            ListaIdentificadores = new List<string>();
+            TabelaSimbolos = new Dictionary<string, string>();
+            Idents = new Stack<string>();
         }
 
         public void ExecuteAction(int action, Token token)
@@ -84,39 +91,55 @@ namespace Rules.Analyzer
                 case STRING:
                     ExecuteString(token);
                     break;
+                case VAR:
+                    ExecuteVar(token);
+                    break;
+                case IDENTIFIERLIST:
+                    ExecuteIdentifierList();
+                    break;
+                case IDENTIFIER:
+                    ExecuteIdentifier(token);
+                    break;
+                case FATOR:
+                    ExecuteFator(token);
+                    break;
+                case EXPRESSION:
+                    ExecuteExpression();
+                    break;
+                case READ:
+                    ExecuteRead();
+                    break;
+                case ASSIGNMENTOPERATOR:
+                    throw new SemanticException("Ação ASSIGNMENTOPERATOR (#36) não implementada.");
+                case COMAND:
+                    throw new SemanticException("Ação COMAND (#37) não implementada.");
+                case IFTRUE:
+                    throw new SemanticException("Ação IFTRUE (#38) não implementada.");
+                case ENDSELECTION:
+                    throw new SemanticException("Ação ENDSELECTION (#39) não implementada.");
+                case IFFALSE:
+                    throw new SemanticException("Ação IFFALSE (#40) não implementada.");
+                case CONDITIONTYPE:
+                    throw new SemanticException("Ação CONDITIONTYPE (#41) não implementada.");
+                case ENDREPETITION:
+                    throw new SemanticException("Ação ENDREPETITION (#42) não implementada.");
                 default:
                     throw new SemanticException(string.Format("Ação #{0} não implementada.", action));
             }
         }
 
-        private void ExecuteString(Token token)
-        {
-            AddCode();
-
-            string lexeme = token.Lexeme;
-
-            if (lexeme == "\\s")
-                lexeme = "\" \"";
-            else if (lexeme == "\\t" || lexeme == "\\n")
-                lexeme = string.Format("\"{0}\"", lexeme);
-
-            AddCode(ldstr + " " + lexeme);
-            AddCode(convr8);
-            Pilha.Push(str);
-        }
-
         private void PrepareStackForArithmeticOperation()
         {
-            var tipo1 = Pilha.Pop();
-            var tipo2 = Pilha.Pop();
+            var tipo1 = PilhaTipos.Pop();
+            var tipo2 = PilhaTipos.Pop();
 
             if (!ValidTypeForArithmeticOperation(tipo1) || !ValidTypeForArithmeticOperation(tipo2))
                 throw new SemanticException("Tipo(s) incompatível(is) em expressão aritmética.");
 
             if (tipo1 == float64 || tipo2 == float64)
-                Pilha.Push(float64);
+                PilhaTipos.Push(float64);
             else
-                Pilha.Push(int64);
+                PilhaTipos.Push(int64);
         }
 
         private bool ValidTypeForArithmeticOperation(string type)
@@ -150,33 +173,33 @@ namespace Rules.Analyzer
 
         private void ExecuteInt(Token token)
         {
-            Pilha.Push(int64);
+            PilhaTipos.Push(int64);
             AddCode(ldci8 + " " + token.Lexeme);
             AddCode(convr8);
         }
 
         private void ExecuteFloat(Token token)
         {
-            Pilha.Push(float64);
+            PilhaTipos.Push(float64);
             AddCode(ldci8 + " " + token.Lexeme);
         }
 
         private void ExecutePlus()
         {
-            var tipo = Pilha.Pop();
+            var tipo = PilhaTipos.Pop();
 
             if (tipo == float64 || tipo == int64)
-                Pilha.Push(tipo);
+                PilhaTipos.Push(tipo);
             else
                 throw new SemanticException("Tipos incompatíveis em expressão aritmética.");
         }
 
         private void ExecuteMinus()
         {
-            var tipo = Pilha.Pop();
+            var tipo = PilhaTipos.Pop();
 
             if (tipo == float64 || tipo == int64)
-                Pilha.Push(tipo);
+                PilhaTipos.Push(tipo);
             else
                 throw new SemanticException("Tipos incompatíveis em expressão aritmética.");
 
@@ -187,7 +210,7 @@ namespace Rules.Analyzer
 
         private void ExecuteTipo()
         {
-            var tipo = Pilha.Pop();
+            var tipo = PilhaTipos.Pop();
 
             if (tipo == int64)
                 AddCode(convi8);
@@ -210,7 +233,7 @@ namespace Rules.Analyzer
             Codigo.Add(".method static public void _principal() {");
             Codigo.Add("    .entrypoint");
             AddCode();
-            Idents.Add(Ident);
+            Idents.Push(Ident);
         }
 
         private void ExecuteEnd()
@@ -218,28 +241,28 @@ namespace Rules.Analyzer
             AddCode();
             AddCode("ret");
             AddCode("}");
-            Idents.RemoveAt(Idents.Count - 1);
+            Idents.Pop();
             AddCode("}");
         }
 
         private void ExecuteTrue()
         {
-            Pilha.Push(Bool);
+            PilhaTipos.Push(Bool);
             AddCode(True);
         }
 
         private void ExecuteFalse()
         {
-            Pilha.Push(Bool);
+            PilhaTipos.Push(Bool);
             AddCode(False);
         }
 
         private void ExecuteNot()
         {
-            var tipo = Pilha.Pop();
+            var tipo = PilhaTipos.Pop();
 
             if (tipo == Bool)
-                Pilha.Push(Bool);
+                PilhaTipos.Push(Bool);
             else
                 throw new SemanticException("Tipo(s) incompatível(is) em expressão lógica.");
 
@@ -249,11 +272,11 @@ namespace Rules.Analyzer
 
         private void ExecuteRelacionalOperation()
         {
-            var tipo1 = Pilha.Pop();
-            var tipo2 = Pilha.Pop();
+            var tipo1 = PilhaTipos.Pop();
+            var tipo2 = PilhaTipos.Pop();
 
             if (tipo1 == tipo2)
-                Pilha.Push(Bool);
+                PilhaTipos.Push(Bool);
             else
                 throw new SemanticException("Tipos incompatíveis em expressão relacional.");
 
@@ -270,6 +293,109 @@ namespace Rules.Analyzer
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void ExecuteString(Token token)
+        {
+            AddCode();
+
+            string lexeme = token.Lexeme;
+
+            if (lexeme == "\\s")
+                lexeme = "\" \"";
+            else if (lexeme == "\\t" || lexeme == "\\n")
+                lexeme = string.Format("\"{0}\"", lexeme);
+
+            AddCode(ldstr + " " + lexeme);
+            PilhaTipos.Push(str);
+        }
+
+        private void ExecuteVar(Token token)
+        {
+            switch (token.Lexeme)
+            {
+                case "int":
+                    TipoVariavel = Semantico.int64;
+                    break;
+                case "real":
+                    TipoVariavel = Semantico.float64;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ExecuteIdentifierList()
+        {
+            foreach (var identificador in ListaIdentificadores)
+            {
+                if (TabelaSimbolos.ContainsKey(identificador))
+                    throw new SemanticException(string.Format("{0} já declarado", identificador));
+                TabelaSimbolos[identificador] = TipoVariavel;
+                AddCode(string.Format(".locals({0} {1})", TipoVariavel, identificador));
+            }
+            ListaIdentificadores.Clear();
+        }
+
+        private void ExecuteIdentifier(Token token)
+        {
+            ListaIdentificadores.Add(token.Lexeme);
+        }
+
+        private void ExecuteFator(Token token)
+        {
+            string identificador = token.Lexeme;
+
+            if (!TabelaSimbolos.ContainsKey(identificador))
+                throw new SemanticException(string.Format("{0} não declarado", identificador));
+
+            string tipoIdentificador = TabelaSimbolos[identificador];
+            PilhaTipos.Push(tipoIdentificador);
+            AddCode(ldloc + " " + identificador);
+
+            if (tipoIdentificador == int64)
+                AddCode(convr8);
+        }
+
+        private void ExecuteExpression()
+        {
+            // listaId.retira = retirar qual? KKKKKKK
+            string identificador = ListaIdentificadores[ListaIdentificadores.Count - 1];
+
+            if (!TabelaSimbolos.ContainsKey(identificador))
+                throw new SemanticException(string.Format("{0} não declarado", identificador));
+
+            string tipoIdentificador = TabelaSimbolos[identificador];
+            string tipoExpressao = PilhaTipos.Pop();
+
+            if (tipoIdentificador != tipoExpressao)
+                throw new SemanticException("Tipo incompatível para atribuição");
+
+            if (tipoIdentificador == int64)
+                AddCode(convi8);
+
+            AddCode(stloc + " " + identificador);
+        }
+
+        private void ExecuteRead()
+        {
+            foreach (var identificador in ListaIdentificadores)
+            {
+                if (!TabelaSimbolos.ContainsKey(identificador))
+                    throw new SemanticException(string.Format("{0} não declarado", identificador));
+
+                string tipoIdentificador = TabelaSimbolos[identificador];
+                string classe = string.Empty;
+
+                if (tipoIdentificador == int64)
+                    classe = "Int64";
+                else if (tipoIdentificador == float64)
+                    classe = "Double";
+
+                AddCode("call string [mscorlib]System.Console::ReadLine()");
+                AddCode(string.Format("call {0} [mscorlib]System.{1}::Parse(string)", tipoIdentificador, classe));
+                AddCode(stloc + " " + "identificador");
             }
         }
 

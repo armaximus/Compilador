@@ -16,9 +16,11 @@
         public const string cgt = "cgt";
         public const string clt = "clt";
         public const string ceq = "ceq";
-
+        public const string ldloc = "ldloc";
+        public const string stloc = "stloc";
         public const string ldci8 = "ldc.i8";
         public const string ldstr = "ldstr";
+
         public const string xor = "xor";
         public const string add = "add";
         public const string sub = "sub";
