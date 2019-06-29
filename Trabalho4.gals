@@ -186,7 +186,7 @@ write = identificador : "write"
 <expressao1> ::= î | and <elemento> #18 <expressao1> | or <elemento> #19 <expressao1>;
 <elemento> ::= <relacional> | true #11 | false #12 | not <elemento> #13 ;
 <relacional> ::= <aritmética> <relacional1> ;
-<relacional1> ::= <operadorRelacional> <aritmética> | î ;
+<relacional1> ::= <operadorRelacional> #9 <aritmética> #10 | î ;
 <operadorRelacional> ::= "==" | "!=" | "<" | "<=" | ">"  | ">=" ;
 <aritmética> ::= <termo> <aritmetica1>;
 <aritmetica1> ::= "+" <termo> #1 <aritmetica1> | "-" <termo> #2 <aritmetica1> | î;

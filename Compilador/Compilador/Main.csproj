@@ -84,16 +84,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="img\abrir.png" />
-    <Content Include="img\colar.png" />
-    <Content Include="img\copiar.png" />
-    <Content Include="img\equipe.png" />
-    <Content Include="img\novo.png" />
-    <Content Include="img\play.png" />
-    <Content Include="img\recortar.png" />
-    <Content Include="img\salvar.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Rules\Rules\Rules.csproj">
       <Project>{95318F16-84ED-4D01-A46C-A8BEAC1FA10D}</Project>
       <Name>Rules</Name>

@@ -7,6 +7,8 @@
         public const string float64 = "float64";
         public const string int64 = "int64";
         public const string Bool = "bool";
+        public const string str = "string";
+
         public const string True = "ldc.i4.1";
         public const string False = "ldc.i4.0";
         public const string convr8 = "conv.r8";
@@ -39,5 +41,22 @@
         public const int MAIN = 15;
         public const int BEGIN = 16;
         public const int END = 17;
+        public const int AND = 18;
+        public const int OR = 19;
+        public const int CHAR = 20;
+        public const int STRING = 21;
+        public const int VAR = 30;
+        public const int IDENTIFIERLIST = 31;
+        public const int IDENTIFIER = 32;
+        public const int FATOR = 33;
+        public const int EXPRESSION = 34;
+        public const int READ = 35;
+        public const int ASSIGNMENTOPERATOR = 36;
+        public const int COMAND = 37;
+        public const int IFTRUE = 38;
+        public const int ENDSELECTION = 39;
+        public const int IFFALSE = 40;
+        public const int CONDITIONTYPE = 41;
+        public const int ENDREPETITION = 42;
     }
 }
