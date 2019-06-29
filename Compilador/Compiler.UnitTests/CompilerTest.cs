@@ -6,11 +6,8 @@ using Rules;
 
 namespace Compiler.UnitTests
 {
-    /// <summary>
-    /// Summary description for SemanticoTest
-    /// </summary>
     [TestClass]
-    public class SemanticoTest
+    public class CompilerTest
     {
         [TestMethod]
         public void EsquemaTraducao_V1()
