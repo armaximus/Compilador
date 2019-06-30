@@ -155,7 +155,7 @@ namespace Compiler.UnitTests
                               "end";
 
             string expected = CabecalhoFixo +
-                              "    .locals(int valor)" + Environment.NewLine +
+                              "    .locals(int64 valor)" + Environment.NewLine +
                               "    call string [mscorlib]System.Console::ReadLine()" + Environment.NewLine +
                               "    call int64 [mscorlib]System.Int64::Parse(string)" + Environment.NewLine +
                               "    stloc valor" + Environment.NewLine +
@@ -180,15 +180,15 @@ namespace Compiler.UnitTests
                               "    brtrue label4" + Environment.NewLine +
                               "    ldloc valor" + Environment.NewLine +
                               "    conv.r8" + Environment.NewLine +
-                              "    ldc.i8 0" + Environment.NewLine +
+                              "    conv.i8" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(int64)" + Environment.NewLine +
                               "    ldstr \"\\n\"" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
-                              "    ldloc valor" + Environment.NewLine + // falta fazer
-                              "    conv.r8" + Environment.NewLine + // falta fazer
+                              "    ldloc valor" + Environment.NewLine + 
+                              "    conv.r8" + Environment.NewLine + 
                               "    ldc.i8 1" + Environment.NewLine +
                               "    conv.r8" + Environment.NewLine +
-                              "    sub" + Environment.NewLine + // falta fazer
+                              "    sub" + Environment.NewLine + 
                               "    conv.i8" + Environment.NewLine +
                               "    stloc valor" + Environment.NewLine +
                               "    br label3" + Environment.NewLine +

@@ -12,18 +12,18 @@ namespace Rules.Analyzer
         public string OperadorRelacional { get; private set; }
         public List<string> Codigo { get; private set; }
         public Stack<string> PilhaTipos { get; private set; }
-        public Stack<string> PilhaRotulos { get; private set; }
         public List<string> ListaIdentificadores { get; private set; }
         public Dictionary<string, string> TabelaSimbolos { get; private set; }
         public string TipoVariavel { get; private set; }
         private Stack<string> Idents { get; set; }
         private int LabelCounter { get; set; }
+        private string LastIdentifier { get; set; }
+        private string PendingAction { get; set; }
 
         public Semantico()
         {
             Codigo = new List<string>();
             PilhaTipos = new Stack<string>();
-            PilhaRotulos = new Stack<string>();
             ListaIdentificadores = new List<string>();
             TabelaSimbolos = new Dictionary<string, string>();
             Idents = new Stack<string>();
@@ -186,12 +186,32 @@ namespace Rules.Analyzer
             PilhaTipos.Push(int64);
             AddCode(ldci8 + " " + token.Lexeme);
             AddCode(convr8);
+
+            ExecutePendingAction();
         }
 
         private void ExecuteFloat(Token token)
         {
             PilhaTipos.Push(float64);
             AddCode(ldcr8 + " " + token.Lexeme);
+
+            ExecutePendingAction();
+        }
+
+        private void ExecutePendingAction()
+        {
+            if (!string.IsNullOrWhiteSpace(PendingAction))
+                switch (PendingAction)
+                {
+                    case "-=":
+                        AddCode(sub);
+                        break;
+                    case "+=":
+                        AddCode(add);
+                        break;
+                    default:
+                        break;
+                }
         }
 
         private void ExecutePlus()
@@ -394,6 +414,7 @@ namespace Rules.Analyzer
         private void ExecuteFator(Token token)
         {
             string identificador = token.Lexeme;
+            LastIdentifier = identificador;
 
             if (!TabelaSimbolos.ContainsKey(identificador))
                 throw new SemanticException(string.Format("{0} não declarado", identificador));
@@ -410,6 +431,7 @@ namespace Rules.Analyzer
         {
             // listaId.retira = retirar qual? KKKKKKK
             string identificador = ListaIdentificadores[ListaIdentificadores.Count - 1];
+            LastIdentifier = identificador;
 
             if (!TabelaSimbolos.ContainsKey(identificador))
                 throw new SemanticException(string.Format("{0} não declarado", identificador));
@@ -451,16 +473,20 @@ namespace Rules.Analyzer
         {
             string lexeme = token.Lexeme;
 
-            if (lexeme == "+=" || lexeme == "-=")
+            if ((lexeme == "+=" || lexeme == "-=") && !string.IsNullOrWhiteSpace(LastIdentifier))
             {
-                // Carregar o valor armazenado no identificador (ldloc)
+                if (!TabelaSimbolos.ContainsKey(LastIdentifier))
+                    throw new SemanticException(string.Format("{0} não declarado", LastIdentifier));
+
+                string tipoIdentificador = TabelaSimbolos[LastIdentifier];
+
+                AddCode(ldloc + " " + LastIdentifier);
+
+                if (tipoIdentificador == int64)
+                    AddCode(convr8);
+
+                PendingAction = lexeme;
             }
-
-            // Gerar codigo para atribuir o resultado da expressão ao identificador (stloc)
-
-            //Para o operador +=, somar (add) o valor armazenado ao resultado da expressão e atribuir o resultado da expressão ao identificador (stloc)
-
-            //Para o operador -=, somar (sub) o valor armazenado ao resultado da expressão e atribuir o resultado da expressão ao identificador (stloc)
         }
 
         private void CreateLabel()
