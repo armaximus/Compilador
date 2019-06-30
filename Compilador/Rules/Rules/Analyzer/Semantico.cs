@@ -325,6 +325,21 @@ namespace Rules.Analyzer
                 case "==":
                     AddCode(ceq);
                     break;
+                case "!=":
+                    AddCode(ceq);
+                    AddCode(False);
+                    AddCode(ceq);
+                    break;
+                case "<=":
+                    AddCode(clt);
+                    AddCode(False);
+                    AddCode(ceq);
+                    break;
+                case ">=":
+                    AddCode(cgt);
+                    AddCode(False);
+                    AddCode(ceq);
+                    break;
                 default:
                     break;
             }
