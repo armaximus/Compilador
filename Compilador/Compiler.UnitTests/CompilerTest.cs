@@ -93,8 +93,8 @@ namespace Compiler.UnitTests
                               "    stloc area" + Environment.NewLine +
                               "    label2:" + Environment.NewLine +
                               "    ldloc area" + Environment.NewLine +
-                              "    conv.r8" + Environment.NewLine +
-                              "    conv.i8" + Environment.NewLine +
+                              "    conv.r8" + Environment.NewLine + // verificar se esta linha derveria existir
+                              "    conv.i8" + Environment.NewLine + // verificar se esta linha derveria existir
                               "    call void [mscorlib]System.Console::Write(int64)" + Environment.NewLine +
                               Ret;
 

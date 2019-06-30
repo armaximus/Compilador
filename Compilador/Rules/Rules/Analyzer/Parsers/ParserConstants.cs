@@ -7,7 +7,7 @@
         public const int FIRST_NON_TERMINAL = 49;
         public const int FIRST_SEMANTIC_ACTION = 91;
 
-        public readonly int[][] PARSER_TABLE =
+        public readonly int[][] PARSER_TABLE = new int[][]
         {
             new int[] { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,  0, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
             new int[] { -1, -1, -1, -1, -1, -1, -1,  1, -1, -1, -1, -1, -1,  2, -1, -1, -1, -1,  1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
@@ -52,7 +52,7 @@
             new int[] { -1, 86, 86, 86, 86, 86, -1, -1, -1, -1, -1, 86, -1, -1, -1, -1, -1, -1, -1, 86, -1, -1, -1, 86, -1, -1, -1, -1, 86, 86, -1, -1, 86, 87, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 },
             new int[] { -1, -1, -1, -1, -1, -1, 61, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 61, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 61, 60, 60, 60, 60, 60, 60, 61, 61, -1, -1, -1, -1, -1, -1 }};
 
-        public readonly int[][] PRODUCTIONS =
+        public readonly int[][] PRODUCTIONS = new int[][]
         {
             new int[] { 106,  18,  50,  51, 107,   8,  52,  11, 108 },
             new int[] {   0 },
@@ -144,7 +144,7 @@
             new int[] {   0 }
         };
 
-        public readonly string[] PARSER_ERROR =
+        public readonly string[] PARSER_ERROR = new string[]
         {
             string.Empty,
             "fim de arquivo", // fim de programa
