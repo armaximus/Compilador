@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Compilador\Main.csproj", "{1833FBF4-AA1B-4781-8C29-B36B6A2B71EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Compiler\Main.csproj", "{1833FBF4-AA1B-4781-8C29-B36B6A2B71EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rules", "Rules\Rules\Rules.csproj", "{95318F16-84ED-4D01-A46C-A8BEAC1FA10D}"
 EndProject
