@@ -25,7 +25,7 @@ namespace Compiler.UnitTests
                                      "}";
 
         [TestMethod]
-        public void EsquemaTraducao_V1()
+        public void Teste01()
         {
             string programa = "main begin write(1, \\s, 2.5, \\t, \"teste\", \\n). end";
 
@@ -133,6 +133,66 @@ namespace Compiler.UnitTests
                               "    ldstr \"menor ou igual\"" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
                               "    label3:" + Environment.NewLine +
+                              Ret;
+
+            var compilador = new Rules.Compiler();
+
+            compilador.Compile(programa);
+
+            Assert.IsFalse(string.IsNullOrWhiteSpace(compilador.Assembly));
+            Assert.AreEqual(expected, compilador.Assembly);
+        }
+
+        [TestMethod]
+        public void Teste05()
+        {
+            string programa = "main begin" + Environment.NewLine +
+                              "    int: valor." + Environment.NewLine +
+                              "    read (valor)." + Environment.NewLine +
+                              "    (valor < 0) whileTrueDo read (valor). end." + Environment.NewLine +
+                              "    (valor == 0) whileFalseDo write (valor, \\n)." + Environment.NewLine +
+                              "                              valor -= 1. end." + Environment.NewLine +
+                              "end";
+
+            string expected = CabecalhoFixo +
+                              "    .locals(int valor)" + Environment.NewLine +
+                              "    call string [mscorlib]System.Console::ReadLine()" + Environment.NewLine +
+                              "    call int64 [mscorlib]System.Int64::Parse(string)" + Environment.NewLine +
+                              "    stloc valor" + Environment.NewLine +
+                              "    label1:" + Environment.NewLine +
+                              "    ldloc valor" + Environment.NewLine +
+                              "    conv.r8" + Environment.NewLine +
+                              "    ldc.i8 0" + Environment.NewLine +
+                              "    conv.r8" + Environment.NewLine +
+                              "    clt" + Environment.NewLine +
+                              "    brfalse label2" + Environment.NewLine +
+                              "    call string [mscorlib]System.Console::ReadLine()" + Environment.NewLine +
+                              "    call int64 [mscorlib]System.Int64::Parse(string)" + Environment.NewLine +
+                              "    stloc valor" + Environment.NewLine +
+                              "    br label1" + Environment.NewLine +
+                              "    label2:" + Environment.NewLine +
+                              "    label3:" + Environment.NewLine +
+                              "    ldloc valor" + Environment.NewLine +
+                              "    conv.r8" + Environment.NewLine +
+                              "    ldc.i8 0" + Environment.NewLine +
+                              "    conv.r8" + Environment.NewLine +
+                              "    ceq" + Environment.NewLine +
+                              "    brtrue label4" + Environment.NewLine +
+                              "    ldloc valor" + Environment.NewLine +
+                              "    conv.r8" + Environment.NewLine +
+                              "    ldc.i8 0" + Environment.NewLine +
+                              "    call void [mscorlib]System.Console::Write(int64)" + Environment.NewLine +
+                              "    ldstr \"\\n\"" + Environment.NewLine +
+                              "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
+                              "    ldloc valor" + Environment.NewLine + // falta fazer
+                              "    conv.r8" + Environment.NewLine + // falta fazer
+                              "    ldc.i8 1" + Environment.NewLine +
+                              "    conv.r8" + Environment.NewLine +
+                              "    sub" + Environment.NewLine + // falta fazer
+                              "    conv.i8" + Environment.NewLine +
+                              "    stloc valor" + Environment.NewLine +
+                              "    br label3" + Environment.NewLine +
+                              "    label4:" + Environment.NewLine +
                               Ret;
 
             var compilador = new Rules.Compiler();

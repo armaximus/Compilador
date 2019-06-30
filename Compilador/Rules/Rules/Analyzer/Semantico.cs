@@ -128,10 +128,10 @@ namespace Rules.Analyzer
                     ExecuteIfFalse();
                     break;
                 case CONDITIONTYPE:
-                    ExecuteConditionType();
+                    ExecuteConditionType(token);
                     break;
                 case ENDREPETITION:
-                    CreateLabel();
+                    ExecuteEndRepetition();
                     break;
                 default:
                     throw new SemanticException(string.Format("Ação #{0} não implementada.", action));
@@ -372,7 +372,8 @@ namespace Rules.Analyzer
 
         private void ExecuteIdentifier(Token token)
         {
-            ListaIdentificadores.Add(token.Lexeme);
+            if (!ListaIdentificadores.Contains(token.Lexeme))
+                ListaIdentificadores.Add(token.Lexeme);
         }
 
         private void ExecuteFator(Token token)
@@ -455,7 +456,7 @@ namespace Rules.Analyzer
 
         private void ExecuteIfTrue()
         {
-            AddCode("brfalse " + label + (LabelCounter + 1));
+            AddBrLabel("false");
         }
 
         private void ExecuteIfFalse()
@@ -464,9 +465,20 @@ namespace Rules.Analyzer
             CreateLabel();
         }
 
-        private void ExecuteConditionType()
+        private void ExecuteConditionType(Token token)
         {
-            //Aparentemente, é para representar o tipo de verificação (whileTrueDo/whileFalseDo)
+            AddBrLabel(token.Lexeme == "whileTrueDo" ? "false" : "true");
+        }
+
+        private void ExecuteEndRepetition()
+        {
+            AddCode("br " + label + (LabelCounter));
+            CreateLabel();
+        }
+
+        private void AddBrLabel(string type)
+        {
+            AddCode("br" + type + " " + label + (LabelCounter + 1));
         }
 
         private void AddCode()
