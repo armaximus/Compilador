@@ -46,7 +46,6 @@
       <DependentUpon>Semantico.cs</DependentUpon>
     </Compile>
     <Compile Include="Compiler.cs" />
-    <Compile Include="FileManager.cs" />
     <Compile Include="Analyzer\Constants\Constants.cs" />
     <Compile Include="Analyzer\Lexico.cs" />
     <Compile Include="Analyzer\Parsers\ParserConstants.cs" />

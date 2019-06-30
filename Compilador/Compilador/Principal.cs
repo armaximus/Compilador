@@ -1,9 +1,6 @@
 ﻿using Rules;
 using ScintillaNET;
 using System;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Main

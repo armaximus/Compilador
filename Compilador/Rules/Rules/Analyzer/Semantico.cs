@@ -17,6 +17,7 @@ namespace Rules.Analyzer
         public Dictionary<string, string> TabelaSimbolos { get; private set; }
         public string TipoVariavel { get; private set; }
         private Stack<string> Idents { get; set; }
+        private int LabelCounter { get; set; }
 
         public Semantico()
         {
@@ -115,22 +116,22 @@ namespace Rules.Analyzer
                     ExecuteAssignment(token);
                     break;
                 case COMMAND:
-                    ExecuteCommand();
+                    CreateLabel();
                     break;
                 case IFTRUE:
-                    ExecuteIf("true");
+                    ExecuteIf("false");
                     break;
                 case ENDSELECTION:
-                    ExecuteEndCycle("selection");
+                    CreateLabel();
                     break;
                 case IFFALSE:
-                    ExecuteIf("false");
+                    ExecuteIf("true");
                     break;
                 case CONDITIONTYPE:
                     ExecuteConditionType();
                     break;
                 case ENDREPETITION:
-                    ExecuteEndCycle("selection");
+                    CreateLabel();
                     break;
                 default:
                     throw new SemanticException(string.Format("Ação #{0} não implementada.", action));
@@ -426,7 +427,7 @@ namespace Rules.Analyzer
 
                 AddCode("call string [mscorlib]System.Console::ReadLine()");
                 AddCode(string.Format("call {0} [mscorlib]System.{1}::Parse(string)", tipoIdentificador, classe));
-                AddCode(stloc + " " + "identificador");
+                AddCode(stloc + " " + identificador);
             }
         }
 
@@ -446,36 +447,15 @@ namespace Rules.Analyzer
             //Para o operador -=, somar (sub) o valor armazenado ao resultado da expressão e atribuir o resultado da expressão ao identificador (stloc)
         }
 
-        private void ExecuteCommand()
+        private void CreateLabel()
         {
-            // WhileTrueDo
-            // Rotular o primeiro comando da expressão
-            // Verificar se o resultado da expressão é false, se sim, desviar para o primeiro comando após o end
-            // Gerar codigo para desviar para o primeiro comando da expressão e rotular o primeiro comando após o end
-
-            // WhileFalseDo
-            // Rotular o primeiro comando da expressão
-            // Verificar se o resultado da expressão é true, se sim, desviar para o primeiro comando após o end
-            // Gerar codigo para desviar para o primeiro comando da expressão e rotular o primeiro comando após o end
+            LabelCounter++;
+            AddCode(label + LabelCounter + ":");
         }
 
         private void ExecuteIf(string tipo)
         {
-            // IfTrueDo
-            // Verifica o resultado da expressão
-            // Se for false:
-            // Quando existe ifFlaseDo, desviar para este bloco
-            // Senão, vai para o end (rotular)
-
-            // IfFalseDo
-            // Verifica o resultado da expressão
-            // se for false, desviar para este bloco
-            // Senão, vai para o end (rotular)
-        }
-
-        private void ExecuteEndCycle(string tipo)
-        {
-            //Aparentemente, é para sair do ciclo de seleção ou repetição
+            AddCode("br" + tipo + " " + label + (LabelCounter + 1));
         }
 
         private void ExecuteConditionType()

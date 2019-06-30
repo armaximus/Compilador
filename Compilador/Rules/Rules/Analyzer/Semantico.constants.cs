@@ -26,6 +26,7 @@
         public const string sub = "sub";
         public const string mul = "mul";
         public const string div = "div";
+        public const string label = "label";
 
         public const int ADD = 1;
         public const int SUB = 2;
