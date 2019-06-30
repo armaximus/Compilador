@@ -119,13 +119,13 @@ namespace Rules.Analyzer
                     CreateLabel();
                     break;
                 case IFTRUE:
-                    ExecuteIf("false");
+                    ExecuteIfTrue();
                     break;
                 case ENDSELECTION:
                     CreateLabel();
                     break;
                 case IFFALSE:
-                    ExecuteIf("true");
+                    ExecuteIfFalse();
                     break;
                 case CONDITIONTYPE:
                     ExecuteConditionType();
@@ -191,7 +191,7 @@ namespace Rules.Analyzer
         private void ExecuteFloat(Token token)
         {
             PilhaTipos.Push(float64);
-            AddCode(ldci8 + " " + token.Lexeme);
+            AddCode(ldcr8 + " " + token.Lexeme);
         }
 
         private void ExecutePlus()
@@ -350,7 +350,7 @@ namespace Rules.Analyzer
                 case "int":
                     TipoVariavel = Semantico.int64;
                     break;
-                case "real":
+                case "float":
                     TipoVariavel = Semantico.float64;
                     break;
                 default:
@@ -453,9 +453,15 @@ namespace Rules.Analyzer
             AddCode(label + LabelCounter + ":");
         }
 
-        private void ExecuteIf(string tipo)
+        private void ExecuteIfTrue()
         {
-            AddCode("br" + tipo + " " + label + (LabelCounter + 1));
+            AddCode("brfalse " + label + (LabelCounter + 1));
+        }
+
+        private void ExecuteIfFalse()
+        {
+            AddCode("br " + label + (LabelCounter + 2));
+            CreateLabel();
         }
 
         private void ExecuteConditionType()

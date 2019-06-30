@@ -36,7 +36,7 @@ namespace Compiler.UnitTests
                               "    call void [mscorlib]System.Console::Write(int64)" + Environment.NewLine +
                               "    ldstr \" \"" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
-                              "    ldc.i8 2.5" + Environment.NewLine +
+                              "    ldc.r8 2.5" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(float64)" + Environment.NewLine +
                               "    ldstr \"\\t\"" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
@@ -96,6 +96,43 @@ namespace Compiler.UnitTests
                               "    conv.r8" + Environment.NewLine + // verificar se esta linha derveria existir
                               "    conv.i8" + Environment.NewLine + // verificar se esta linha derveria existir
                               "    call void [mscorlib]System.Console::Write(int64)" + Environment.NewLine +
+                              Ret;
+
+            var compilador = new Rules.Compiler();
+
+            compilador.Compile(programa);
+
+            Assert.IsFalse(string.IsNullOrWhiteSpace(compilador.Assembly));
+            Assert.AreEqual(expected, compilador.Assembly);
+        }
+
+        [TestMethod]
+        public void Teste04()
+        {
+            string programa = "main begin" + Environment.NewLine +
+                              "    float: valor." + Environment.NewLine +
+                              "    read (valor)." + Environment.NewLine +
+                              "    (valor > 0.0) ifTrueDo write (\"maior\")." + Environment.NewLine +
+                              "                  ifFalseDo write (\"menor ou igual\"). end." + Environment.NewLine +
+                              "end";
+
+            string expected = CabecalhoFixo +
+                              "    .locals(float64 valor)" + Environment.NewLine +
+                              "    call string [mscorlib]System.Console::ReadLine()" + Environment.NewLine +
+                              "    call float64 [mscorlib]System.Double::Parse(string)" + Environment.NewLine +
+                              "    stloc valor" + Environment.NewLine +
+                              "    label1:" + Environment.NewLine +
+                              "    ldloc valor" + Environment.NewLine +
+                              "    ldc.r8 0.0" + Environment.NewLine +
+                              "    cgt" + Environment.NewLine +
+                              "    brfalse label2" + Environment.NewLine +
+                              "    ldstr \"maior\"" + Environment.NewLine +
+                              "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
+                              "    br label3" + Environment.NewLine +
+                              "    label2:" + Environment.NewLine +
+                              "    ldstr \"menor ou igual\"" + Environment.NewLine +
+                              "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
+                              "    label3:" + Environment.NewLine +
                               Ret;
 
             var compilador = new Rules.Compiler();

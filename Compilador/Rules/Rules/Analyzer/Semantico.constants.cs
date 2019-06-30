@@ -19,6 +19,7 @@
         public const string ldloc = "ldloc";
         public const string stloc = "stloc";
         public const string ldci8 = "ldc.i8";
+        public const string ldcr8 = "ldc.r8";
         public const string ldstr = "ldstr";
 
         public const string xor = "xor";
