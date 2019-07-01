@@ -435,7 +435,6 @@ namespace Rules.Analyzer
 
         private void ExecuteExpression()
         {
-            // listaId.retira = retirar qual? KKKKKKK
             string identificador = ListaIdentificadores[ListaIdentificadores.Count - 1];
             LastIdentifier = identificador;
 
