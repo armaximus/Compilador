@@ -201,6 +201,7 @@ namespace Rules.Analyzer
         private void ExecutePendingAction()
         {
             if (!string.IsNullOrWhiteSpace(PendingAction))
+            {
                 switch (PendingAction)
                 {
                     case "-=":
@@ -212,6 +213,9 @@ namespace Rules.Analyzer
                     default:
                         break;
                 }
+
+                PendingAction = string.Empty;
+            }
         }
 
         private void ExecutePlus()
