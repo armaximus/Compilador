@@ -1,8 +1,1 @@
-main begin
-	int: lado, area.
-
-	write ("digite um valor para lado: ").
-	read (lado).
-	area = lado * lado.
-	write (area).
-end
+main begin write(1, \s, 2.5, \t, "teste", \n). end

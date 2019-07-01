@@ -1,0 +1,6 @@
+main begin
+    float: valor.
+    read (valor).
+    (valor > 0.0) ifTrueDo write ("maior").
+                  ifFalseDo write ("menor ou igual"). end.
+end

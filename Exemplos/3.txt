@@ -1,0 +1,7 @@
+main begin
+    int: lado, area.
+    read (lado).
+    area = 0.
+    (lado > 0) ifTrueDo area = lado * lado. end.
+    write (area).
+end

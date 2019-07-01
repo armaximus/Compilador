@@ -1,0 +1,7 @@
+main begin
+    int: valor.
+    read (valor).
+    (valor < 0) whileTrueDo read (valor). end.
+    (valor == 0) whileFalseDo write (valor, \n).
+                              valor -= 1. end.
+end
