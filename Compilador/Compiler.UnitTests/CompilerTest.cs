@@ -3,6 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Rules;
+using Rules.Analyzer.Exceptions;
 
 namespace Compiler.UnitTests
 {
@@ -23,7 +24,7 @@ namespace Compiler.UnitTests
                                      "    ret" + Environment.NewLine +
                                      "    }" + Environment.NewLine +
                                      "}";
-
+        
         [TestMethod]
         public void Teste01()
         {
@@ -45,8 +46,46 @@ namespace Compiler.UnitTests
                               "    ldstr \"\\n\"" + Environment.NewLine +
                               "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
                               Ret;
+            
+            var compilador = new Rules.Compiler();
 
+            compilador.Compile(programa);
 
+            Assert.IsFalse(string.IsNullOrWhiteSpace(compilador.Assembly));
+            Assert.AreEqual(expected, compilador.Assembly);
+        }
+
+        [TestMethod]
+        public void Teste02()
+        {
+            string programa = "main begin" + Environment.NewLine +
+                             "    int: lado, area." + Environment.NewLine +
+                             "    write (\"digite um valor para lado: \")." + Environment.NewLine +
+                             "    read (lado)." + Environment.NewLine +
+                             "    area = lado * lado." + Environment.NewLine +
+                             "    write (area)." + Environment.NewLine +
+                             "end ";
+
+            string expected = CabecalhoFixo +
+                              "    .locals(int64 lado)" + Environment.NewLine +
+                              "    .locals(int64 area)" + Environment.NewLine +
+                              "    ldstr \"digite um valor para lado: \"" + Environment.NewLine +
+                              "    call void [mscorlib]System.Console::Write(string)" + Environment.NewLine +
+                              "    call string [mscorlib]System.Console::ReadLine()" + Environment.NewLine +
+                              "    call int64 [mscorlib]System.Int64::Parse(string)" + Environment.NewLine +
+                              "    stloc lado" + Environment.NewLine +
+                              "    ldloc lado" + Environment.NewLine +
+                              "    conv.r8" + Environment.NewLine +
+                              "    ldloc lado" + Environment.NewLine +
+                              "    conv.r8" + Environment.NewLine +
+                              "    mul" + Environment.NewLine +
+                              "    conv.i8" + Environment.NewLine +
+                              "    stloc area" + Environment.NewLine +
+                              "    ldloc area" + Environment.NewLine +
+                              "    conv.r8" + Environment.NewLine + // verificar se esta linha derveria existir
+                              "    conv.i8" + Environment.NewLine + // verificar se esta linha derveria existir
+                              "    call void [mscorlib]System.Console::Write(int64)" + Environment.NewLine +
+                              Ret;
 
             var compilador = new Rules.Compiler();
 
@@ -201,6 +240,54 @@ namespace Compiler.UnitTests
 
             Assert.IsFalse(string.IsNullOrWhiteSpace(compilador.Assembly));
             Assert.AreEqual(expected, compilador.Assembly);
+        }
+
+        [TestMethod]
+        public void ErroLexico()
+        {
+            string programa = "main begin" + Environment.NewLine +
+                             "    int: lado." + Environment.NewLine +
+                             "    write (\"digite um valor para lado: )" + Environment.NewLine +
+                             "    read (lado)." + Environment.NewLine +
+                             "    area = lado * lado." + Environment.NewLine +
+                             "    write (area)." + Environment.NewLine +
+                             "end ";
+
+            var compilador = new Rules.Compiler();
+
+            Assert.ThrowsException<LexicalException>(() => compilador.Compile(programa));
+        }
+
+        [TestMethod]
+        public void ErroSintatico()
+        {
+            string programa = "main begin" + Environment.NewLine +
+                             "    int: lado." + Environment.NewLine +
+                             "    write (\"digite um valor para lado: \")" + Environment.NewLine +
+                             "    read (lado)." + Environment.NewLine +
+                             "    area = lado * lado." + Environment.NewLine +
+                             "    write (area)." + Environment.NewLine +
+                             "end ";
+
+            var compilador = new Rules.Compiler();
+
+            Assert.ThrowsException<SyntaticException>(() => compilador.Compile(programa));
+        }
+
+        [TestMethod]
+        public void ErroSemantico()
+        {
+            string programa = "main begin" + Environment.NewLine +
+                             "    int: lado." + Environment.NewLine +
+                             "    write (\"digite um valor para lado: \")." + Environment.NewLine +
+                             "    read (lado)." + Environment.NewLine +
+                             "    area = lado * lado." + Environment.NewLine +
+                             "    write (area)." + Environment.NewLine +
+                             "end ";
+
+            var compilador = new Rules.Compiler();
+
+            Assert.ThrowsException<SemanticException>(() => compilador.Compile(programa));
         }
     }
 }
