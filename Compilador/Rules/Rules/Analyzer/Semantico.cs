@@ -391,6 +391,8 @@ namespace Rules.Analyzer
                 default:
                     break;
             }
+
+            ExecutePendingAction();
         }
 
         private void ExecuteIdentifierList()
@@ -486,6 +488,7 @@ namespace Rules.Analyzer
                     AddCode(convr8);
 
                 PendingAction = lexeme;
+                LastIdentifier = string.Empty;
             }
         }
 

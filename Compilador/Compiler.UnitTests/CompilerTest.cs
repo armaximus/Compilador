@@ -59,12 +59,12 @@ namespace Compiler.UnitTests
         public void Teste02()
         {
             string programa = "main begin" + Environment.NewLine +
-                             "    int: lado, area." + Environment.NewLine +
-                             "    write (\"digite um valor para lado: \")." + Environment.NewLine +
-                             "    read (lado)." + Environment.NewLine +
-                             "    area = lado * lado." + Environment.NewLine +
-                             "    write (area)." + Environment.NewLine +
-                             "end ";
+                              "    int: lado, area." + Environment.NewLine +
+                              "    write (\"digite um valor para lado: \")." + Environment.NewLine +
+                              "    read (lado)." + Environment.NewLine +
+                              "    area = lado * lado." + Environment.NewLine +
+                              "    write (area)." + Environment.NewLine +
+                              "end ";
 
             string expected = CabecalhoFixo +
                               "    .locals(int64 lado)" + Environment.NewLine +

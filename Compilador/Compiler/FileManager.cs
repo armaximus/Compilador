@@ -97,7 +97,7 @@ namespace Main
             string fileName = string.Empty;
 
             if (string.IsNullOrWhiteSpace(FilePath))
-                fileName = Path.Combine(Directory.GetCurrentDirectory(), DateTime.Now.ToString("yyyyMMMddHHmmss").ToUpper() + ".il");
+                fileName = SelectPathToSave("ILASM|*.il");
             else
                 fileName = FilePath.Substring(0, FilePath.Length - 4) + ".il";
 
