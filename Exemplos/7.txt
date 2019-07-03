@@ -1,0 +1,4 @@
+main begin
+    (true or false) ifTrueDo write("true").
+                    ifFalseDo write("false"). end.
+end

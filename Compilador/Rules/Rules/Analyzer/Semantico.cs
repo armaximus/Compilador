@@ -281,24 +281,34 @@ namespace Rules.Analyzer
 
         private void ExecuteAnd()
         {
-            /*
-             v1 = Desempilha
-             v2 = Desempilha
+            var tipo1 = PilhaTipos.Pop();
+            var tipo2 = PilhaTipos.Pop();
 
-             Empilha(v1 && v2)
-             */
+            if (tipo1 == tipo2)
+            {
+                PilhaTipos.Push(Bool);
+                AddCode("and");
+                AddCode();
+            }
+            else
+                throw new SemanticException("Tipos incompatíveis em expressão lógica");
 
             PilhaTipos.Push(Bool);
         }
 
         private void ExecuteOr()
         {
-            /*
-             v1 = Desempilha
-             v2 = Desempilha
+            var tipo1 = PilhaTipos.Pop();
+            var tipo2 = PilhaTipos.Pop();
 
-             Empilha(v1 || v2)
-             */
+            if (tipo1 == tipo2)
+            {
+                PilhaTipos.Push(Bool);
+                AddCode("or");
+                AddCode();
+            }
+            else
+                throw new SemanticException("Tipos incompatíveis em expressão lógica");
 
             PilhaTipos.Push(Bool);
         }
