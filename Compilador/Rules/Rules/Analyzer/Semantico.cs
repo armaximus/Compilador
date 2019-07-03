@@ -292,8 +292,6 @@ namespace Rules.Analyzer
             }
             else
                 throw new SemanticException("Tipos incompatíveis em expressão lógica");
-
-            PilhaTipos.Push(Bool);
         }
 
         private void ExecuteOr()
@@ -309,8 +307,6 @@ namespace Rules.Analyzer
             }
             else
                 throw new SemanticException("Tipos incompatíveis em expressão lógica");
-
-            PilhaTipos.Push(Bool);
         }
 
         private void ExecuteTrue()

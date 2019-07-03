@@ -41,14 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Analyzer\Parsers\ExpressionParser.cs" />
     <Compile Include="Analyzer\Semantico.constants.cs">
       <DependentUpon>Semantico.cs</DependentUpon>
     </Compile>
     <Compile Include="Compiler.cs" />
     <Compile Include="Analyzer\Constants\Constants.cs" />
     <Compile Include="Analyzer\Lexico.cs" />
-    <Compile Include="Analyzer\Parsers\ParserConstants.cs" />
+    <Compile Include="Analyzer\Constants\ParserConstants.cs" />
     <Compile Include="Analyzer\Exceptions\AnalysisException.cs" />
     <Compile Include="Analyzer\Exceptions\LexicalException.cs" />
     <Compile Include="Analyzer\Exceptions\SemanticException.cs" />
